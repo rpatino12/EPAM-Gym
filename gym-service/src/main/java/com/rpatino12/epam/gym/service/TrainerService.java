@@ -1,16 +1,25 @@
 package com.rpatino12.epam.gym.service;
 
+import com.rpatino12.epam.gym.dto.TrainerMonthlySummary;
 import com.rpatino12.epam.gym.dto.UserLogin;
+import com.rpatino12.epam.gym.dto.WorkloadDto;
 import com.rpatino12.epam.gym.exception.ResourceNotFoundException;
 import com.rpatino12.epam.gym.exception.TrainerNullException;
 import com.rpatino12.epam.gym.model.User;
 import com.rpatino12.epam.gym.repo.TrainerRepository;
 import com.rpatino12.epam.gym.model.Trainer;
 import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
+import java.time.YearMonth;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +29,9 @@ public class TrainerService {
 
     private final TrainerRepository trainerRepository;
     private final UserService userService;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     public TrainerService(TrainerRepository trainerRepository, UserService userService) {
         this.trainerRepository = trainerRepository;
@@ -131,6 +143,32 @@ public class TrainerService {
             }
         }
         return result;
+    }
+
+    public List<TrainerMonthlySummary> getAllWorkloads(){
+        return restTemplate.getForObject("http://localhost:8081/api/trainers", List.class);
+    }
+
+    public WorkloadDto saveWorkload(WorkloadDto workloadDto){
+        return restTemplate.postForObject(
+                "http://localhost:8081/api/trainers",
+                workloadDto,
+                WorkloadDto.class
+        );
+    }
+
+    public Void updateWorkload(WorkloadDto workloadDto){
+        return restTemplate.exchange(
+                "http://localhost:8081/api/trainers/monthly-summary",
+                HttpMethod.PUT,
+                new HttpEntity<>(workloadDto),
+                Void.class
+        ).getBody();
+    }
+
+    public Double getMonthlySummary(String username, YearMonth yearMonth){
+        String url = String.format("http://localhost:8081/api/trainers/%s/monthly-summary/%s", username, yearMonth);
+        return restTemplate.getForObject(url, Double.class);
     }
 
     @PostConstruct

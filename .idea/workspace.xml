@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="8b985ab9-6807-42e8-a4e7-feb50dc51328" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/controller/TrainerRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/controller/TrainerRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/service/TrainerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/service/TrainerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trainer-service/src/main/java/com/rpatino12/epam/trainerservice/model/Trainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/src/main/java/com/rpatino12/epam/trainerservice/model/Trainer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

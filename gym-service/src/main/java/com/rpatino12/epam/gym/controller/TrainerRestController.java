@@ -1,8 +1,6 @@
 package com.rpatino12.epam.gym.controller;
 
-import com.rpatino12.epam.gym.dto.TrainerDto;
-import com.rpatino12.epam.gym.dto.UpdateUserDto;
-import com.rpatino12.epam.gym.dto.UserLogin;
+import com.rpatino12.epam.gym.dto.*;
 import com.rpatino12.epam.gym.model.Trainer;
 import com.rpatino12.epam.gym.model.TrainingType;
 import com.rpatino12.epam.gym.model.User;
@@ -11,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.YearMonth;
 import java.util.List;
 
 @RestController
@@ -136,5 +136,28 @@ public class TrainerRestController {
         } else {
             return new ResponseEntity<>(activate, HttpStatus.ACCEPTED);
         }
+    }
+
+    @GetMapping("/workload")
+    public ResponseEntity<List<TrainerMonthlySummary>> getTrainersWorkload(){
+        return new ResponseEntity<>(trainerService.getAllWorkloads(), HttpStatus.OK);
+    }
+
+    @PostMapping("/workload")
+    public ResponseEntity<WorkloadDto> saveTrainerWorkload(@RequestBody WorkloadDto workloadDto){
+        return new ResponseEntity<>(trainerService.saveWorkload(workloadDto), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/workload/update")
+    public ResponseEntity<Void> updateWorkload(@RequestBody WorkloadDto workloadDto){
+        trainerService.updateWorkload(workloadDto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/{username}/workload/{yearMonth}")
+    public ResponseEntity<Double> getMonthlySummary(
+            @PathVariable("username") String username,
+            @PathVariable("yearMonth") @DateTimeFormat(pattern = "yyyy-MM") YearMonth yearMonth){
+        return new ResponseEntity<>(trainerService.getMonthlySummary(username, yearMonth), HttpStatus.OK);
     }
 }

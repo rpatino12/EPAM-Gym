@@ -1,0 +1,78 @@
+# Common configuration
+spring:
+  profiles:
+    active: dev
+  jpa:
+    hibernate:
+      ddl-auto: none
+  output:
+    ansi:
+      enabled: ALWAYS
+
+# Symmetric key, this must be at least 256 bits
+jwt:
+  key: 1faa372517ac1d389758d3750fc07acf00f542277f26fec1ce4593e93f64e339
+
+springdoc: # OpenAPI (Swagger) Configuration
+  api-docs:
+    enabled: 'true'
+  swagger-ui:
+    enabled: 'true'
+    path: /doc/swagger-ui.html
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+    health:
+      roles: USER
+      show-details: when-authorized
+---
+# Dev profile
+spring:
+  config:
+    activate:
+      on-profile: dev
+  h2:
+    console:
+      enabled: 'true'
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: ricardo
+    password: epam
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        jdbc:
+          datasource:
+            init:
+              ScriptUtils: debug
+---
+# Prod profile
+spring:
+  config:
+    activate:
+      on-profile: prod
+  h2:
+    console:
+      enabled: 'true'
+  datasource:
+    url: jdbc:h2:mem:gymdb
+    driverClassName: org.h2.Driver
+    username: admin
+    password: password
+
+server:
+  port: 8000
+
+logging:
+  level:
+    root: info

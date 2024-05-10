@@ -139,25 +139,20 @@ public class TrainerRestController {
     }
 
     @GetMapping("/workload")
+    @Operation(summary = "View all trainers monthly summary workload")
     public ResponseEntity<List<TrainerMonthlySummary>> getTrainersWorkload(){
+        log.info("Received GET request to /api/trainers/workload");
+
         return new ResponseEntity<>(trainerService.getAllWorkloads(), HttpStatus.OK);
     }
 
-    @PostMapping("/workload")
-    public ResponseEntity<WorkloadDto> saveTrainerWorkload(@RequestBody WorkloadDto workloadDto){
-        return new ResponseEntity<>(trainerService.saveWorkload(workloadDto), HttpStatus.CREATED);
-    }
-
-    @PutMapping("/workload/update")
-    public ResponseEntity<Void> updateWorkload(@RequestBody WorkloadDto workloadDto){
-        trainerService.updateWorkload(workloadDto);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
     @GetMapping("/{username}/workload/{yearMonth}")
+    @Operation(summary = "View month's summary workload of specific trainer")
     public ResponseEntity<Double> getMonthlySummary(
             @PathVariable("username") String username,
             @PathVariable("yearMonth") @DateTimeFormat(pattern = "yyyy-MM") YearMonth yearMonth){
+        log.info("Received GET request to /api/trainers/{}/workload/{}", username, yearMonth);
+
         return new ResponseEntity<>(trainerService.getMonthlySummary(username, yearMonth), HttpStatus.OK);
     }
 }

@@ -24,18 +24,24 @@ public class TrainerController {
 
     @GetMapping
     public ResponseEntity<List<Trainer>> getAll() {
+        log.info("Received GET request to /api/trainers");
+
         List<Trainer> trainers = trainerService.getAllTrainers();
         return ResponseEntity.ok(trainers);
     }
 
     @PostMapping
     public ResponseEntity<Trainer> postTrainer(@RequestBody Trainer trainer) {
+        log.info("Received POST request to /api/trainers");
+
         return new ResponseEntity<>(trainerService.saveTrainer(trainer), HttpStatus.OK);
     }
 
 
     @PutMapping("/monthly-summary")
     public ResponseEntity<Void> updateMonthlySummary(@RequestBody TrainerDto trainerDto) {
+        log.info("Received PUT request to /api/trainers/monthly-summary");
+
         trainerService.updateMonthlySummary(trainerDto);
         return ResponseEntity.ok().build();
     }
@@ -44,11 +50,9 @@ public class TrainerController {
     public ResponseEntity<Double> getMonthlySummary(
             @PathVariable String username,
             @PathVariable @DateTimeFormat(pattern = "yyyy-MM") YearMonth yearMonth) {
+        log.info("Received GET request to /api/trainers/{}/monthly-summary/{}", username, yearMonth);
+
         Double monthlySummary = trainerService.getMonthlySummary(username, yearMonth);
-        if(monthlySummary != null) {
-            return ResponseEntity.ok(monthlySummary);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(monthlySummary);
     }
 }

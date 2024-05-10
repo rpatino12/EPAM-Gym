@@ -146,27 +146,21 @@ public class TrainerService {
     }
 
     public List<TrainerMonthlySummary> getAllWorkloads(){
-        return restTemplate.getForObject("http://localhost:8081/api/trainers", List.class);
-    }
-
-    public WorkloadDto saveWorkload(WorkloadDto workloadDto){
-        return restTemplate.postForObject(
+        log.info("Getting the registered monthly workloads of all trainers");
+        List<TrainerMonthlySummary> monthlySummaryList = restTemplate.getForObject(
                 "http://localhost:8081/api/trainers",
-                workloadDto,
-                WorkloadDto.class
+                List.class
         );
-    }
-
-    public Void updateWorkload(WorkloadDto workloadDto){
-        return restTemplate.exchange(
-                "http://localhost:8081/api/trainers/monthly-summary",
-                HttpMethod.PUT,
-                new HttpEntity<>(workloadDto),
-                Void.class
-        ).getBody();
+        if (monthlySummaryList.isEmpty()){
+            log.error("There are no training sessions registered yet for any trainer");
+            throw new ResourceNotFoundException("Trainers workload");
+        }
+        return monthlySummaryList;
     }
 
     public Double getMonthlySummary(String username, YearMonth yearMonth){
+        log.info("Getting {}'s workload summary of trainer {}", yearMonth.getMonth().toString().toLowerCase(), username);
+
         String url = String.format("http://localhost:8081/api/trainers/%s/monthly-summary/%s", username, yearMonth);
         return restTemplate.getForObject(url, Double.class);
     }

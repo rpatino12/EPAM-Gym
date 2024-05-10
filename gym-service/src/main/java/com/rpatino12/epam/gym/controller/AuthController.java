@@ -26,7 +26,7 @@ public class AuthController {
     public String token(Authentication authentication){
         log.info("Received POST request to /api/auth/token \nToken requested for user: '{}'", authentication.getName());
         String token = tokenService.generateToken(authentication);
-        log.info("Token granted {}", token);
+        log.info("Token granted");
         return token;
     }
 

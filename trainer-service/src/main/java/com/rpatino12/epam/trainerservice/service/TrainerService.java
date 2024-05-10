@@ -3,6 +3,7 @@ package com.rpatino12.epam.trainerservice.service;
 import com.rpatino12.epam.trainerservice.dto.TrainerDto;
 import com.rpatino12.epam.trainerservice.model.Trainer;
 import com.rpatino12.epam.trainerservice.repo.TrainerRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.YearMonth;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class TrainerService {
     private final TrainerRepository trainerRepository;
 
@@ -18,10 +20,15 @@ public class TrainerService {
     }
 
     public List<Trainer> getAllTrainers() {
+        log.info("Getting the registered monthly workloads of all trainers");
         return trainerRepository.findAll();
     }
 
     public Trainer saveTrainer(Trainer trainer) {
+        if (trainerRepository.existsByUsername(trainer.getUsername())){
+            return new Trainer();
+        }
+        log.info("Saving workload summary of trainer {}", trainer.getUsername());
         return trainerRepository.save(trainer);
     }
 
@@ -35,16 +42,23 @@ public class TrainerService {
             double newDuration = currentDuration + trainerDto.getTrainingDuration();
             trainer.getMonthlySummary().put(yearMonth, newDuration);
 
+            log.info(
+                    "Updating {} workload summary of trainer {}",
+                    yearMonth,
+                    trainer.getUsername()
+            );
             trainerRepository.save(trainer);
         }
     }
 
     public Double getMonthlySummary(String username, YearMonth yearMonth) {
+        log.info("Getting {}'s workload summary of trainer {}", yearMonth.getMonth().toString().toLowerCase(), username);
+
         Optional<Trainer> trainerOptional = trainerRepository.findByUsername(username);
         if(trainerOptional.isPresent()) {
             Trainer trainer = trainerOptional.get();
             return trainer.getMonthlySummary().getOrDefault(yearMonth.toString(), 0.0);
         }
-        return null;
+        return 0.0;
     }
 }

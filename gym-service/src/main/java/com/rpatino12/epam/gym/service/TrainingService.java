@@ -1,5 +1,6 @@
 package com.rpatino12.epam.gym.service;
 
+import com.rpatino12.epam.gym.dto.WorkloadDto;
 import com.rpatino12.epam.gym.exception.ResourceNotFoundException;
 import com.rpatino12.epam.gym.exception.TrainingNullException;
 import com.rpatino12.epam.gym.model.Trainee;
@@ -7,9 +8,13 @@ import com.rpatino12.epam.gym.model.Trainer;
 import com.rpatino12.epam.gym.repo.TrainingRepository;
 import com.rpatino12.epam.gym.model.Training;
 import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +22,9 @@ import java.util.Optional;
 @Service
 @Slf4j
 public class TrainingService {
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     private final TrainingRepository trainingRepository;
     private final TraineeService traineeService;
@@ -42,6 +50,17 @@ public class TrainingService {
             newTraining.setTrainer(trainer.get());
             newTraining.setTrainingType(trainer.get().getSpecialization());
             Training training = trainingRepository.save(newTraining);
+
+            WorkloadDto workloadDto = new WorkloadDto(
+                    trainerUsername,
+                    trainer.get().getUser().getFirstName(),
+                    trainer.get().getUser().getLastName(),
+                    trainer.get().getUser().getIsActive(),
+                    training.getTrainingDate().toLocalDate(),
+                    training.getTrainingDuration());
+            this.saveTrainerWorkload(workloadDto);
+            this.updateTrainerWorkload(workloadDto);
+
             log.info("Creating training: " + training);
             return true;
         } else {
@@ -71,6 +90,33 @@ public class TrainingService {
     public Optional<List<Training>> getByTrainerUsername(String username){
         log.info("Getting trainer " + username + " trainings: ");
         return trainingRepository.findTrainingByTrainerUserUsername(username);
+    }
+
+    public Void saveTrainerWorkload(WorkloadDto workloadDto){
+        log.info(
+                "Saving {}'s workload summary of trainer {}",
+                workloadDto.getTrainingDate().getMonth().toString().toLowerCase(),
+                workloadDto.getUsername()
+        );
+        return restTemplate.postForObject(
+                "http://localhost:8081/api/trainers",
+                workloadDto,
+                Void.class
+        );
+    }
+
+    public Void updateTrainerWorkload(WorkloadDto workloadDto){
+        log.info(
+                "Updating {}'s workload summary of trainer {}",
+                workloadDto.getTrainingDate().getMonth().toString().toLowerCase(),
+                workloadDto.getUsername()
+        );
+        return restTemplate.exchange(
+                "http://localhost:8081/api/trainers/monthly-summary",
+                HttpMethod.PUT,
+                new HttpEntity<>(workloadDto),
+                Void.class
+        ).getBody();
     }
 
     @PostConstruct

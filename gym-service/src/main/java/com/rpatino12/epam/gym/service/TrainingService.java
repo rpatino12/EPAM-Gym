@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -111,6 +112,31 @@ public class TrainingService {
                 workloadDto.getTrainingDate().getMonth().toString().toLowerCase(),
                 workloadDto.getUsername()
         );
+        return restTemplate.exchange(
+                "http://localhost:8081/api/trainers/monthly-summary",
+                HttpMethod.PUT,
+                new HttpEntity<>(workloadDto),
+                Void.class
+        ).getBody();
+    }
+
+    public Void deleteTrainerWorkload(WorkloadDto workloadDto){
+        log.info(
+                "Deleting {} workload of trainer {}",
+                workloadDto.getTrainingDate(),
+                workloadDto.getUsername()
+        );
+
+        Optional<Training> optionalTraining = trainingRepository.findByTrainingDateAndTrainerUserUsername(
+                Date.valueOf(workloadDto.getTrainingDate()),
+                workloadDto.getUsername()
+        );
+        if (optionalTraining.isPresent()){
+            workloadDto.setTrainingDuration(optionalTraining.get().getTrainingDuration());
+        } else {
+            workloadDto.setTrainingDuration(0.0);
+        }
+
         return restTemplate.exchange(
                 "http://localhost:8081/api/trainers/monthly-summary",
                 HttpMethod.PUT,

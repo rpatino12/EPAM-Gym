@@ -2,6 +2,7 @@ package com.rpatino12.epam.gym.controller;
 
 import com.rpatino12.epam.gym.dto.TrainingDto;
 import com.rpatino12.epam.gym.dto.TrainingTypeDto;
+import com.rpatino12.epam.gym.dto.WorkloadDto;
 import com.rpatino12.epam.gym.model.Trainer;
 import com.rpatino12.epam.gym.model.Training;
 import com.rpatino12.epam.gym.model.TrainingType;
@@ -15,12 +16,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -107,5 +103,14 @@ public class TrainingRestController {
         log.info("Received GET request to /api/trainings/training-types");
 
         return new ResponseEntity<>(trainingTypeService.getAll(), HttpStatus.OK);
+    }
+
+    @PutMapping("/delete-workload")
+    @Operation(summary = "Delete specific training workload")
+    public ResponseEntity<Void> deleteTrainingWorkload(@RequestBody WorkloadDto workloadDto) {
+        log.info("Received PUT request to /api/trainings/delete-workload");
+        workloadDto.setActionType("DELETE");
+        trainingService.deleteTrainerWorkload(workloadDto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

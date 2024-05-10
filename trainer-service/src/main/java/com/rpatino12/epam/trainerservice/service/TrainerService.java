@@ -39,7 +39,13 @@ public class TrainerService {
             String yearMonth = YearMonth.from(trainerDto.getTrainingDate()).toString();
 
             Double currentDuration = trainer.getMonthlySummary().getOrDefault(yearMonth, 0.0);
-            double newDuration = currentDuration + trainerDto.getTrainingDuration();
+            double newDuration;
+            if (trainerDto.getActionType().equals("DELETE")){
+                newDuration = currentDuration - trainerDto.getTrainingDuration();
+                newDuration = (newDuration < 0) ? 0 : newDuration;
+            } else {
+                newDuration = currentDuration + trainerDto.getTrainingDuration();
+            }
             trainer.getMonthlySummary().put(yearMonth, newDuration);
 
             log.info(

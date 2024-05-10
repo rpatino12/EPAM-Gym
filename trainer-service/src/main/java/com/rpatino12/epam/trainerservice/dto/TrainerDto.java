@@ -12,4 +12,5 @@ public class TrainerDto {
     private boolean status;
     private LocalDate trainingDate;
     private double trainingDuration;
+    private String actionType = "ADD";
 }

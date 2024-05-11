@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.rpatino12.epam</groupId>
-	<artifactId>gym</artifactId>
+	<artifactId>gym-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>gym</name>
+	<name>gym-service</name>
 	<description>Gym application for the final project of the Java Specialization program</description>
 	<properties>
 		<java.version>17</java.version>

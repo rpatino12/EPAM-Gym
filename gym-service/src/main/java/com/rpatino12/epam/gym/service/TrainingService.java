@@ -3,18 +3,15 @@ package com.rpatino12.epam.gym.service;
 import com.rpatino12.epam.gym.dto.WorkloadDto;
 import com.rpatino12.epam.gym.exception.ResourceNotFoundException;
 import com.rpatino12.epam.gym.exception.TrainingNullException;
+import com.rpatino12.epam.gym.feignclients.TrainerFeignClient;
 import com.rpatino12.epam.gym.model.Trainee;
 import com.rpatino12.epam.gym.model.Trainer;
 import com.rpatino12.epam.gym.repo.TrainingRepository;
 import com.rpatino12.epam.gym.model.Training;
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.sql.Date;
 import java.util.List;
@@ -24,17 +21,16 @@ import java.util.Optional;
 @Slf4j
 public class TrainingService {
 
-    @Autowired
-    private RestTemplate restTemplate;
-
     private final TrainingRepository trainingRepository;
     private final TraineeService traineeService;
     private final TrainerService trainerService;
+    private final TrainerFeignClient trainerFeignClient;
 
-    public TrainingService(TrainingRepository trainingRepository, TraineeService traineeService, TrainerService trainerService) {
+    public TrainingService(TrainingRepository trainingRepository, TraineeService traineeService, TrainerService trainerService, TrainerFeignClient trainerFeignClient) {
         this.trainingRepository = trainingRepository;
         this.traineeService = traineeService;
         this.trainerService = trainerService;
+        this.trainerFeignClient = trainerFeignClient;
     }
 
     // Training Service class should support possibility to create/select Training profile.
@@ -93,34 +89,25 @@ public class TrainingService {
         return trainingRepository.findTrainingByTrainerUserUsername(username);
     }
 
-    public Void saveTrainerWorkload(WorkloadDto workloadDto){
+    public void saveTrainerWorkload(WorkloadDto workloadDto){
         log.info(
                 "Saving {}'s workload summary of trainer {}",
                 workloadDto.getTrainingDate().getMonth().toString().toLowerCase(),
                 workloadDto.getUsername()
         );
-        return restTemplate.postForObject(
-                "http://localhost:8081/api/trainers",
-                workloadDto,
-                Void.class
-        );
+        trainerFeignClient.postTrainerWorkload(workloadDto);
     }
 
-    public Void updateTrainerWorkload(WorkloadDto workloadDto){
+    public void updateTrainerWorkload(WorkloadDto workloadDto){
         log.info(
                 "Updating {}'s workload summary of trainer {}",
                 workloadDto.getTrainingDate().getMonth().toString().toLowerCase(),
                 workloadDto.getUsername()
         );
-        return restTemplate.exchange(
-                "http://localhost:8081/api/trainers/monthly-summary",
-                HttpMethod.PUT,
-                new HttpEntity<>(workloadDto),
-                Void.class
-        ).getBody();
+        trainerFeignClient.updateTrainerWorkload(workloadDto);
     }
 
-    public Void deleteTrainerWorkload(WorkloadDto workloadDto){
+    public void deleteTrainerWorkload(WorkloadDto workloadDto){
         log.info(
                 "Deleting {} workload of trainer {}",
                 workloadDto.getTrainingDate(),
@@ -137,12 +124,7 @@ public class TrainingService {
             workloadDto.setTrainingDuration(0.0);
         }
 
-        return restTemplate.exchange(
-                "http://localhost:8081/api/trainers/monthly-summary",
-                HttpMethod.PUT,
-                new HttpEntity<>(workloadDto),
-                Void.class
-        ).getBody();
+        trainerFeignClient.updateTrainerWorkload(workloadDto);
     }
 
     @PostConstruct

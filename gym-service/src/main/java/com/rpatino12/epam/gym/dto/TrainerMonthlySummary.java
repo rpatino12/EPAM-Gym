@@ -1,7 +1,10 @@
 package com.rpatino12.epam.gym.dto;
 
+import lombok.Data;
+
 import java.util.Map;
 
+@Data
 public class TrainerMonthlySummary {
     private Long id;
     private String username;

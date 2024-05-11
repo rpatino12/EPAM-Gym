@@ -1,5 +1,7 @@
 # Common configuration
 spring:
+  application:
+    name: gym-service
   profiles:
     active: dev
   jpa:

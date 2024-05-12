@@ -8,4 +8,5 @@ spring:
       server:
         git:
           default-label: config-server
-          uri: https://github.com/rpatino12/EPAM-Gym/config-data
+          uri: https://github.com/rpatino12/EPAM-Gym
+          search-paths: config-data

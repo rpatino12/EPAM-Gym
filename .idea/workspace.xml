@@ -5,25 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b985ab9-6807-42e8-a4e7-feb50dc51328" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/config-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/mvnw.cmd" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/gym-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/service/TrainerServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/service/TrainerServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/service/TrainingServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/service/TrainingServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer-service/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer-service/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer-service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer-service/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer-service/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/resources/bootstrap.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trainer-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trainer-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/src/main/resources/bootstrap.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +63,7 @@
     "Maven.EPAM-Gym [clean].executor": "Run",
     "Maven.EPAM-Gym [verify].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "config-server",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/ricardo_patino/Documents/java_specialization/EPAM-Gym",
     "project.structure.last.edited": "Modules",

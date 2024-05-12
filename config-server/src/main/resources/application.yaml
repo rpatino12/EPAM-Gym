@@ -1,0 +1,12 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          default-label: config-server
+          uri: https://github.com/rpatino12/EPAM-Gym
+          search-paths: config-data

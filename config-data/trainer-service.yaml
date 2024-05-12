@@ -2,8 +2,6 @@ server:
   port: 8081
 
 spring:
-  application:
-    name: trainer-service
   output:
     ansi:
       enabled: ALWAYS

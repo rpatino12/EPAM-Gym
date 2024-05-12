@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: gym-service
   cloud:
     config:
       enabled: true

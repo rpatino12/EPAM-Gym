@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b985ab9-6807-42e8-a4e7-feb50dc51328" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/config-server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/resources/bootstrap.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/src/main/resources/bootstrap.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-server/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +47,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.ConfigServerApplication.executor": "Run",
     "Application.GymApplication.executor": "Run",
     "Application.TrainerServiceApplication.executor": "Run",
     "JUnit.TrainingRestControllerTest.executor": "Run",
@@ -72,7 +67,20 @@
     "settings.editor.selected.configurable": "configurable.group.language"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.TrainingRestControllerTest">
+  <component name="RunManager" selected="Application.GymApplication">
+    <configuration name="ConfigServerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.configserver.ConfigServerApplication" />
+      <module name="config-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rpatino12.epam.configserver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GymApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.gym.GymApplication" />
       <module name="gym-service" />
@@ -96,21 +104,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.rpatino12.epam.gym.controller" />
       <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.gym.controller.TrainingRestControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TrainingServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="gym-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.rpatino12.epam.gym.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.rpatino12.epam.gym.service" />
-      <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.gym.service.TrainingServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -146,11 +139,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.GymApplication" />
+        <item itemvalue="Application.ConfigServerApplication" />
         <item itemvalue="JUnit.TrainingRestControllerTest" />
         <item itemvalue="JUnit.com.rpatino12.epam.gym.controller in gym-service" />
         <item itemvalue="JUnit.com.rpatino12.epam.gym.service in gym-service" />
-        <item itemvalue="JUnit.TrainingServiceTest" />
-        <item itemvalue="Application.GymApplication" />
       </list>
     </recent_temporary>
   </component>

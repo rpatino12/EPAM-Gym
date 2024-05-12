@@ -8,10 +8,6 @@
     ansi:
       enabled: ALWAYS
 
-# Symmetric key, this must be at least 256 bits
-jwt:
-  key: 1faa372517ac1d389758d3750fc07acf00f542277f26fec1ce4593e93f64e339
-
 springdoc: # OpenAPI (Swagger) Configuration
   api-docs:
     enabled: 'true'

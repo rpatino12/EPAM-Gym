@@ -10,18 +10,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.sql.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -42,16 +38,11 @@ public class Trainee implements Serializable {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    @Transient
-    @ManyToMany(cascade = CascadeType.REMOVE)
+    @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinTable(name="TRAINEE2TRAINER",
             joinColumns=@JoinColumn(name="TRAINEE_ID"),
             inverseJoinColumns=@JoinColumn(name="TRAINER_ID"))
     private Set<Trainer> trainers = new HashSet<>();
-
-    @Transient
-    @OneToMany(mappedBy = "trainee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Training> trainingsList = new ArrayList<>();
 
     @Override
     public String toString() {

@@ -52,7 +52,7 @@ public class TrainingRestController {
     @GetMapping("/trainee-username/{username}")
     @Operation(summary = "Retrieve specific training with the supplied trainee username")
     public ResponseEntity<List<Training>> getByTrainee(@PathVariable(name = "username") String username){
-        log.info("Received GET request to /api/trainings/trainee-username/{username} with parameter: {}", username);
+        log.info("Received GET request to /api/trainings/trainee-username/{}", username);
 
         List<Training> trainings = trainingService.getByTraineeUsername(username).orElse(new ArrayList<>());
         return trainings.isEmpty() ?
@@ -63,7 +63,7 @@ public class TrainingRestController {
     @GetMapping("/trainer-username/{username}")
     @Operation(summary = "Retrieve specific training with the supplied trainer username")
     public ResponseEntity<List<Training>> getByTrainer(@PathVariable(name = "username") String username){
-        log.info("Received GET request to /api/trainings/trainer-username/{username} with parameter: {}", username);
+        log.info("Received GET request to /api/trainings/trainer-username/{}", username);
 
         List<Training> trainings = trainingService.getByTrainerUsername(username).orElse(new ArrayList<>());
         return trainings.isEmpty() ?

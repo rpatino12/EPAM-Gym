@@ -1,14 +1,11 @@
 package com.rpatino12.epam.gym.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,14 +30,6 @@ public class User implements Serializable {
     private String password;
     @Column(name = "IS_ACTIVE")
     private Boolean isActive = true;
-
-    @Transient
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Trainee trainee;
-
-    @Transient
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Trainer trainer;
 
     @Override
     public String toString() {

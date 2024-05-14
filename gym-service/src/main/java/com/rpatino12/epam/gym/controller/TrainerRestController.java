@@ -47,7 +47,7 @@ public class TrainerRestController {
     @GetMapping("/{username}")
     @Operation(summary = "Retrieve specific trainer with the supplied trainer username")
     public ResponseEntity<Trainer> getTrainerByUsername(@PathVariable("username") String username){
-        log.info("Received GET request to /api/trainers/{username} with parameter: {}", username);
+        log.info("Received GET request to /api/trainers/{}", username);
 
         return trainerService.getByUsername(username)
                 .map(trainer -> new ResponseEntity<>(trainer, HttpStatus.OK))

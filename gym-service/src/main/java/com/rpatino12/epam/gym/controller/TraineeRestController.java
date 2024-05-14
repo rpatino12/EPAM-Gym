@@ -50,7 +50,7 @@ public class TraineeRestController {
     @GetMapping("/{username}")
     @Operation(summary = "Retrieve specific trainee with the supplied trainee username")
     public ResponseEntity<Trainee> getTraineeByUsername(@PathVariable("username") String username){
-        log.info("Received GET request to /api/trainees/{username} with parameter: {}", username);
+        log.info("Received GET request to /api/trainees/{}", username);
 
         return traineeService.getByUsername(username)
                 .map(trainee -> new ResponseEntity<>(trainee, HttpStatus.OK))
@@ -80,7 +80,7 @@ public class TraineeRestController {
     @DeleteMapping("/delete/{username}")
     @Operation(summary = "Delete specific trainee with the supplied trainee username")
     public ResponseEntity deleteTraineeByUsername(@PathVariable(name = "username") String username){
-        log.info("Received DELETE request to /api/trainees/delete/{username} with parameter: {}", username);
+        log.info("Received DELETE request to /api/trainees/delete/{}", username);
 
         if (traineeService.deleteByUsername(username)){
             return new ResponseEntity<>(HttpStatus.OK);

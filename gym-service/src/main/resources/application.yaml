@@ -10,6 +10,21 @@ spring:
   output:
     ansi:
       enabled: ALWAYS
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+        alphanumeric-ids:
+          enabled: true
+resilience4j:
+  circuitbreaker:
+    instances:
+      DemoClientgetDemo:
+        minimumNumberOfCalls: 69
+  timelimiter:
+    instances:
+      DemoClientgetDemo:
+        timeoutDuration: 10s
 
 # Symmetric key, this must be at least 256 bits
 jwt:

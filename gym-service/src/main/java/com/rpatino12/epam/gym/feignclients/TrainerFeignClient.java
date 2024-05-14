@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.YearMonth;
 import java.util.List;
 
-@FeignClient(name = "trainer-service", url = "http://localhost:8081")
+@FeignClient(name = "trainer-service", url = "http://localhost:8081", fallback = TrainerServiceFallback.class)
 public interface TrainerFeignClient {
 
     @GetMapping("/api/trainers")

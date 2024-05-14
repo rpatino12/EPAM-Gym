@@ -5,25 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b985ab9-6807-42e8-a4e7-feb50dc51328" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/eureka-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/service/TrainerServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/service/TrainerServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/service/TrainingServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/service/TrainingServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer-service/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer-service/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer-service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer-service/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer-service/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,34 +47,60 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.GymApplication.executor": "Run",
-    "Application.TrainerServiceApplication.executor": "Run",
-    "JUnit.TrainingRestControllerTest.executor": "Run",
-    "JUnit.TrainingServiceTest.executor": "Run",
-    "JUnit.com.rpatino12.epam.gym.controller in gym-service.executor": "Run",
-    "JUnit.com.rpatino12.epam.gym.service in gym-service.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "Maven.EPAM-Gym [clean].executor": "Run",
-    "Maven.EPAM-Gym [verify].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ricardo_patino/Documents/java_specialization/EPAM-Gym",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "configurable.group.language"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.GymApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TrainerServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TrainingRestControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TrainingServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.com.rpatino12.epam.gym.controller in gym-service.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.com.rpatino12.epam.gym.service in gym-service.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EPAM-Gym [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EPAM-Gym [verify].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ricardo_patino/Documents/java_specialization/EPAM-Gym&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.language&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="JUnit.TrainingRestControllerTest">
+}</component>
+  <component name="RunManager" selected="Application.EurekaServerApplication">
+    <configuration name="EurekaServerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.eurekaserver.EurekaServerApplication" />
+      <module name="eureka-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rpatino12.epam.eurekaserver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GymApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.gym.GymApplication" />
       <module name="gym-service" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.rpatino12.epam.gym.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TrainerServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.trainerservice.TrainerServiceApplication" />
+      <module name="trainer-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rpatino12.epam.trainerservice.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -112,21 +123,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TrainingServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="gym-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.rpatino12.epam.gym.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.rpatino12.epam.gym.service" />
-      <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.gym.service.TrainingServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="com.rpatino12.epam.gym.controller in gym-service" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gym-service" />
       <extension name="coverage">
@@ -141,27 +137,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.rpatino12.epam.gym.service in gym-service" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="gym-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.rpatino12.epam.gym.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.rpatino12.epam.gym.service" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.EurekaServerApplication" />
+        <item itemvalue="Application.TrainerServiceApplication" />
+        <item itemvalue="Application.GymApplication" />
         <item itemvalue="JUnit.TrainingRestControllerTest" />
         <item itemvalue="JUnit.com.rpatino12.epam.gym.controller in gym-service" />
-        <item itemvalue="JUnit.com.rpatino12.epam.gym.service in gym-service" />
-        <item itemvalue="JUnit.TrainingServiceTest" />
-        <item itemvalue="Application.GymApplication" />
       </list>
     </recent_temporary>
   </component>

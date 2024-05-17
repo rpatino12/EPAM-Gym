@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -33,6 +34,8 @@ class TraineeServiceTest {
     private UserService userService;
     @Mock
     private TraineeRepository traineeRepository;
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
     private Trainee trainee;
     private User user;
@@ -73,6 +76,7 @@ class TraineeServiceTest {
     void save() {
         Mockito.doReturn(trainee).when(traineeRepository).save(trainee);
         Mockito.doReturn(user).when(userService).registerUser(user);
+        Mockito.doReturn(user.getPassword()).when(passwordEncoder).encode(user.getPassword());
         UserLogin userLogin = traineeService.save(trainee);
 
         assertNotNull(userLogin);

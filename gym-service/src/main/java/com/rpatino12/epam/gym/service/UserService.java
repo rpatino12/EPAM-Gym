@@ -5,6 +5,7 @@ import com.rpatino12.epam.gym.exception.UserNullException;
 import com.rpatino12.epam.gym.repo.UserRepository;
 import com.rpatino12.epam.gym.model.User;
 import jakarta.annotation.PostConstruct;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,11 @@ import java.util.Optional;
 @Slf4j
 public class UserService {
 
+    private final PasswordEncoder encoder;
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(PasswordEncoder encoder, UserRepository userRepository) {
+        this.encoder = encoder;
         this.userRepository = userRepository;
     }
 
@@ -79,7 +82,7 @@ public class UserService {
         return userRepository.findById(userId)
                 .map(
                         user -> {
-                            user.setPassword(newPassword);
+                            user.setPassword(encoder.encode(newPassword));
                             return userRepository.save(user);
                         }
                 ).get();
@@ -107,7 +110,7 @@ public class UserService {
         log.info("Authenticating user...");
         if (optionalUser.isPresent()){
             User user = optionalUser.get();
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)){
+            if (user.getUsername().equals(username) && encoder.matches(password, user.getPassword())){
                 log.info("Login user " + username);
                 return true;
             } else {

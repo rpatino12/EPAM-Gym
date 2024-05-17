@@ -9,6 +9,7 @@ import com.rpatino12.epam.gym.model.User;
 import com.rpatino12.epam.gym.repo.TrainerRepository;
 import com.rpatino12.epam.gym.model.Trainer;
 import jakarta.annotation.PostConstruct;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,11 +22,13 @@ import java.util.Optional;
 @Slf4j
 public class TrainerService {
 
+    private final PasswordEncoder passwordEncoder;
     private final TrainerRepository trainerRepository;
     private final UserService userService;
     private final TrainerFeignClient trainerFeignClient;
 
-    public TrainerService(TrainerRepository trainerRepository, UserService userService, TrainerFeignClient trainerFeignClient) {
+    public TrainerService(PasswordEncoder passwordEncoder, TrainerRepository trainerRepository, UserService userService, TrainerFeignClient trainerFeignClient) {
+        this.passwordEncoder = passwordEncoder;
         this.trainerRepository = trainerRepository;
         this.userService = userService;
         this.trainerFeignClient = trainerFeignClient;
@@ -40,9 +43,11 @@ public class TrainerService {
         }
         newTrainer.setUser(userService.registerUser(newTrainer.getUser()));
         Trainer trainer = trainerRepository.save(newTrainer);
+        UserLogin userLogin = new UserLogin(trainer.getUser().getUsername(), trainer.getUser().getPassword());
+        trainer.getUser().setPassword(passwordEncoder.encode(trainer.getUser().getPassword()));
         log.info("Creating trainer: " + trainer);
 
-        return new UserLogin(trainer.getUser().getUsername(), trainer.getUser().getPassword());
+        return userLogin;
     }
 
     @Transactional
@@ -52,7 +57,7 @@ public class TrainerService {
             throw new TrainerNullException("Trainer cannot be null");
         }
         User updatedUser = userService.updateUser(updatedTrainer.getUser(), username);
-
+        updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
         if (trainerRepository.findTrainerByUserUsername(username).isEmpty()){
             log.error("The entity to be updated does not exist");
             throw new ResourceNotFoundException("Trainer", "username", username);
@@ -98,7 +103,7 @@ public class TrainerService {
         log.info("Updating trainer password");
         Trainer trainer = this.getByUsername(username).orElse(new Trainer());
         String result = "";
-        if (null==trainer.getUser() || !oldPassword.equals(trainer.getUser().getPassword())){
+        if (null==trainer.getUser() || !passwordEncoder.matches(oldPassword, trainer.getUser().getPassword())){
             result = "Wrong username or password";
             log.error(result);
         } else {
@@ -121,7 +126,7 @@ public class TrainerService {
     public String updateActiveStatus(String username, String password){
         Trainer trainer = this.getByUsername(username).orElse(new Trainer());
         String result = "";
-        if (null==trainer.getUser() || !password.equals(trainer.getUser().getPassword())){
+        if (null==trainer.getUser() || !passwordEncoder.matches(password, trainer.getUser().getPassword())){
             result = "Wrong username or password";
             log.error(result);
         } else {

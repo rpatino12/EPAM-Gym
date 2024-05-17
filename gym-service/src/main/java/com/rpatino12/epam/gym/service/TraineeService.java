@@ -7,6 +7,7 @@ import com.rpatino12.epam.gym.model.User;
 import com.rpatino12.epam.gym.repo.TraineeRepository;
 import com.rpatino12.epam.gym.model.Trainee;
 import jakarta.annotation.PostConstruct;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,12 +19,14 @@ import java.util.Optional;
 @Slf4j
 public class TraineeService {
 
+    private final PasswordEncoder passwordEncoder;
     private final TraineeRepository traineeRepository;
     private final UserService userService;
 
-    public TraineeService(TraineeRepository traineeRepository, UserService userService) {
+    public TraineeService(TraineeRepository traineeRepository, UserService userService, PasswordEncoder passwordEncoder) {
         this.traineeRepository = traineeRepository;
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // Trainee Service class should support possibility to create/update/delete/select Trainee profile.
@@ -35,9 +38,11 @@ public class TraineeService {
         }
         newTrainee.setUser(userService.registerUser(newTrainee.getUser()));
         Trainee trainee = traineeRepository.save(newTrainee);
+        UserLogin userLogin = new UserLogin(trainee.getUser().getUsername(), trainee.getUser().getPassword());
+        trainee.getUser().setPassword(passwordEncoder.encode(trainee.getUser().getPassword()));
         log.info("Creating trainee: " + trainee);
 
-        return new UserLogin(trainee.getUser().getUsername(), trainee.getUser().getPassword());
+        return userLogin;
     }
 
     @Transactional
@@ -47,6 +52,7 @@ public class TraineeService {
             throw new TraineeNullException("Trainee cannot be null");
         }
         User updatedUser = userService.updateUser(updatedTrainee.getUser(), username);
+        updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
         log.info("""
                         Updating trainee {}:\s
                         First Name: {}\s
@@ -113,7 +119,7 @@ public class TraineeService {
         log.info("Updating trainee password");
         Trainee trainee = this.getByUsername(username).orElse(new Trainee());
         String result = "";
-        if (null==trainee.getUser() || !oldPassword.equals(trainee.getUser().getPassword())){
+        if (null==trainee.getUser() || !passwordEncoder.matches(oldPassword, trainee.getUser().getPassword())){
             result = "Wrong username or password";
             log.error(result);
         } else {
@@ -136,7 +142,7 @@ public class TraineeService {
     public String updateActiveStatus(String username, String password){
         Trainee trainee = this.getByUsername(username).orElse(new Trainee());
         String result = "";
-        if (null==trainee.getUser() || !password.equals(trainee.getUser().getPassword())){
+        if (null==trainee.getUser() || !passwordEncoder.matches(password, trainee.getUser().getPassword())){
             result = "Wrong username or password";
             log.error(result);
         } else {

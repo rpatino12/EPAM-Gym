@@ -1,9 +1,15 @@
-insert into USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, IS_ACTIVE) values ('Manya', 'Whitcomb', 'manya.whitcomb', 'vbxowmkpue', true);
-insert into USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, IS_ACTIVE) values ('Shea', 'McFater', 'shea.mcfater', 'pmilyjaewb', true);
-insert into USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, IS_ACTIVE) values ('Miquela', 'Trembley', 'miquela.trembley', 'lvuhcyjdmw', true);
-insert into USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, IS_ACTIVE) values ('Roddy', 'Patman', 'roddy.patman', 'aulecriyox', true);
-insert into USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, IS_ACTIVE) values ('Betteann', 'Staten', 'betteann.staten', 'npwrbgzsom', true);
-insert into USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, IS_ACTIVE) values ('Ricardo', 'Patino', 'ricardo.patino', 'password', true);
+insert into USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, IS_ACTIVE) values ('Manya', 'Whitcomb', 'manya.whitcomb', '$2a$10$cZaltgerD6no7a1Zp5Re9uH/irQp3fKzf1YdCrurdv6/0MR/h1ioe', true);
+-- vbxowmkpue
+insert into USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, IS_ACTIVE) values ('Shea', 'McFater', 'shea.mcfater', '$2a$10$AQ6OLoJw6h0SDgig2QI.GeQpfIayhGoCAHvsaKMv.SVyKCrp1TaeS', true);
+-- pmilyjaewb
+insert into USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, IS_ACTIVE) values ('Miquela', 'Trembley', 'miquela.trembley', '$2a$10$umWZR.yFjm1nTSt..YhyLO1V0l9hCMwjjBRYmyulhpI178exuLGtG', true);
+-- lvuhcyjdmw
+insert into USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, IS_ACTIVE) values ('Roddy', 'Patman', 'roddy.patman', '$2a$10$4h2vde8Ib15hjUvge9wEluBh33zFOFd6RtG8pd6idK2yxvP1EOQN2', true);
+-- aulecriyox
+insert into USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, IS_ACTIVE) values ('Betteann', 'Staten', 'betteann.staten', '$2a$10$5/LcLxM1FEZX6wHs/Jq3buofe4.kP4XXOUjiw8NVZfDlbvAnSx5Wi', true);
+-- npwrbgzsom
+insert into USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, IS_ACTIVE) values ('Ricardo', 'Patino', 'ricardo.patino', '$2a$10$JlBYH.oDN0JP2x5jD72fauR9b2G85kY6WyiErlUcCCla21nHK6LLq', true);
+-- password
 
 insert into TRAINEE (BIRTHDATE, ADDRESS, USER_ID) values ('2001-05-15', '6612 Rockefeller Lane', 1);
 insert into TRAINEE (BIRTHDATE, ADDRESS, USER_ID) values ('1993-08-24', '234 American Point', 2);

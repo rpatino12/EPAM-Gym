@@ -6,13 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="8b985ab9-6807-42e8-a4e7-feb50dc51328" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/service/TraineeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/service/TraineeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/service/TrainerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/service/TrainerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/controller/TrainingRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/controller/TrainingRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/model/Trainee.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/model/Trainee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/model/Trainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/model/Trainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/model/Training.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/model/Training.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/service/TrainingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/service/TrainingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/controller/TrainerRestControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/controller/TrainerRestControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/controller/TrainingRestControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/controller/TrainingRestControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/controller/UserRestControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/controller/UserRestControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/service/TraineeServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/service/TraineeServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/service/TrainerServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/service/TrainerServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/service/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/service/UserServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,10 +61,21 @@
     "Application.GymApplication.executor": "Run",
     "Application.TrainerServiceApplication.executor": "Run",
     "JUnit.TraineeServiceTest.executor": "Run",
+    "JUnit.TraineeServiceTest.not_updatePassword.executor": "Run",
     "JUnit.TraineeServiceTest.save.executor": "Run",
+    "JUnit.TraineeServiceTest.updateActiveStatus.executor": "Run",
+    "JUnit.TraineeServiceTest.updatePassword.executor": "Run",
+    "JUnit.TrainerRestControllerTest.updatePassword.executor": "Run",
+    "JUnit.TrainerServiceTest.executor": "Run",
     "JUnit.TrainingRestControllerTest.executor": "Run",
+    "JUnit.TrainingRestControllerTest.getAll.executor": "Run",
+    "JUnit.TrainingRestControllerTest.getByTrainer.executor": "Run",
     "JUnit.TrainingServiceTest.executor": "Run",
-    "JUnit.com.rpatino12.epam.gym.controller in gym-service.executor": "Coverage",
+    "JUnit.UserRestControllerTest.login.executor": "Run",
+    "JUnit.UserServiceTest.authenticate.executor": "Run",
+    "JUnit.UserServiceTest.executor": "Run",
+    "JUnit.UserServiceTest.updateUserPassword.executor": "Run",
+    "JUnit.com.rpatino12.epam.gym.controller in gym-service.executor": "Run",
     "JUnit.com.rpatino12.epam.gym.service in gym-service.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "Maven.EPAM-Gym [clean].executor": "Run",
@@ -76,42 +91,54 @@
     "settings.editor.selected.configurable": "configurable.group.language"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.TrainerServiceApplication">
-    <configuration name="EurekaServerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.eurekaserver.EurekaServerApplication" />
-      <module name="eureka-server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.rpatino12.epam.eurekaserver.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GymApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.gym.GymApplication" />
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.rpatino12.epam.gym.dto" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.com.rpatino12.epam.gym.controller in gym-service">
+    <configuration name="TraineeServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gym-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.rpatino12.epam.gym.*" />
+          <option name="PATTERN" value="com.rpatino12.epam.gym.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.rpatino12.epam.gym.service" />
+      <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.gym.service.TraineeServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TrainerServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.trainerservice.TrainerServiceApplication" />
-      <module name="trainer-service" />
+    <configuration name="TraineeServiceTest.updateActiveStatus" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gym-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.rpatino12.epam.trainerservice.*" />
+          <option name="PATTERN" value="com.rpatino12.epam.gym.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.rpatino12.epam.gym.service" />
+      <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.gym.service.TraineeServiceTest" />
+      <option name="METHOD_NAME" value="updateActiveStatus" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TrainerServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gym-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rpatino12.epam.gym.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.rpatino12.epam.gym.service" />
+      <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.gym.service.TrainerServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -146,11 +173,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TrainerServiceApplication" />
-        <item itemvalue="Application.GymApplication" />
-        <item itemvalue="Application.EurekaServerApplication" />
-        <item itemvalue="JUnit.com.rpatino12.epam.gym.service in gym-service" />
         <item itemvalue="JUnit.com.rpatino12.epam.gym.controller in gym-service" />
+        <item itemvalue="JUnit.com.rpatino12.epam.gym.service in gym-service" />
+        <item itemvalue="JUnit.TrainerServiceTest" />
+        <item itemvalue="JUnit.TraineeServiceTest" />
+        <item itemvalue="JUnit.TraineeServiceTest.updateActiveStatus" />
       </list>
     </recent_temporary>
   </component>

@@ -1,23 +1,16 @@
 package com.rpatino12.epam.gym.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -42,7 +35,13 @@ public class Trainee implements Serializable {
     @JoinTable(name="TRAINEE2TRAINER",
             joinColumns=@JoinColumn(name="TRAINEE_ID"),
             inverseJoinColumns=@JoinColumn(name="TRAINER_ID"))
+    @JsonIgnoreProperties(value = {"trainees", "trainings"})
     private Set<Trainer> trainers = new HashSet<>();
+
+    @OneToMany(mappedBy = "trainee")
+    @JsonManagedReference(value = "trainee")
+    @JsonIgnore
+    private List<Training> trainings;
 
     @Override
     public String toString() {

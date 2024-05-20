@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
@@ -28,6 +30,8 @@ class UserServiceTest {
 
     @Mock
     private UserRepository userRepository;
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
     private User user;
     private List<User> userList;
@@ -128,11 +132,13 @@ class UserServiceTest {
     void updateUserPassword() {
         Mockito.when(userRepository.save(any(User.class))).thenReturn(user);
         Mockito.doReturn(Optional.of(user)).when(userRepository).findById(user.getId());
+        Mockito.when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
+
         User user1 = userService.updateUserPassword("newPassword", user.getId());
 
         assertNotNull(user1);
         assertEquals(user.getFirstName(), user1.getFirstName());
-        assertEquals("newPassword", user1.getPassword());
+        assertEquals("encodedPassword", user1.getPassword());
     }
 
     @Test
@@ -150,6 +156,7 @@ class UserServiceTest {
     @DisplayName("authenticate() with given username and password return true")
     void authenticate() {
         Mockito.doReturn(Optional.of(user)).when(userRepository).findByUsername(user.getUsername());
+        Mockito.when(passwordEncoder.matches(anyString(), anyString())).thenReturn(true);
 
         boolean isAuthenticated = userService.authenticate(user.getUsername(), user.getPassword());
 

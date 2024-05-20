@@ -44,10 +44,10 @@ class TrainingRestControllerTest {
     void getAll() throws Exception {
         this.mvc.perform(get("/api/trainings").header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("\"trainingName\":\"Hard\"")))
-                .andExpect(content().string(containsString("\"username\":\"roddy.patman\"")))
-                .andExpect(content().string(containsString("\"username\":\"manya.whitcomb\"")))
-                .andExpect(content().string(containsString("\"trainingTypeName\":\"Fitness\"")));
+                .andExpect(content().string(containsString("\"name\":\"Hard\"")))
+                .andExpect(content().string(containsString("\"date\":\"2023-09-10\"")))
+                .andExpect(content().string(containsString("\"trainerUsername\":\"roddy.patman\"")))
+                .andExpect(content().string(containsString("\"traineeUsername\":\"manya.whitcomb\"")));
     }
 
     @Test
@@ -66,9 +66,9 @@ class TrainingRestControllerTest {
         this.mvc.perform(get("/api/trainings/trainee-username/manya.whitcomb")
                         .header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("\"firstName\":\"Manya\"")))
-                .andExpect(content().string(containsString("\"lastName\":\"Whitcomb\"")))
-                .andExpect(content().string(containsString("\"trainingDate\":\"2023-09-10\"")));
+                .andExpect(content().string(containsString("\"name\":\"Easy\"")))
+                .andExpect(content().string(containsString("\"traineeUsername\":\"manya.whitcomb\"")))
+                .andExpect(content().string(containsString("\"date\":\"2023-02-08\"")));
     }
 
     @Test
@@ -76,10 +76,9 @@ class TrainingRestControllerTest {
         this.mvc.perform(get("/api/trainings/trainer-username/betteann.staten")
                         .header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("\"firstName\":\"Betteann\"")))
-                .andExpect(content().string(containsString("\"lastName\":\"Staten\"")))
-                .andExpect(content().string(containsString("\"trainingId\":2")))
-                .andExpect(content().string(containsString("\"trainingName\":\"Easy\"")));
+                .andExpect(content().string(containsString("\"name\":\"Easy\"")))
+                .andExpect(content().string(containsString("\"duration\":60.0")))
+                .andExpect(content().string(containsString("\"trainerUsername\":\"betteann.staten\"")));
     }
 
     @Test

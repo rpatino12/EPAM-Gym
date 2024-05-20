@@ -139,7 +139,7 @@ class TrainerRestControllerTest {
 
     @Test
     void updatePassword() throws Exception {
-        UpdateUserDto credentials = new UpdateUserDto("betteann.staten", "npwrbgzsom", "very-strong-password1234!");
+        UpdateUserDto credentials = new UpdateUserDto("roddy.patman", "aulecriyox", "very-strong-password1234!");
 
         this.mvc.perform(put("/api/trainers/update-password")
                         .header("Authorization", "Bearer " + token)

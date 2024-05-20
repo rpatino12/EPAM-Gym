@@ -42,7 +42,7 @@ class UserRestControllerTest {
 
     @Test
     void login() throws Exception {
-        UserLogin userLogin = new UserLogin("shea.mcfater", "pmilyjaewb");
+        UserLogin userLogin = new UserLogin("ricardo.patino", "password");
 
         this.mvc.perform(get("/api/users/login")
                         .header("Authorization", "Bearer " + token)

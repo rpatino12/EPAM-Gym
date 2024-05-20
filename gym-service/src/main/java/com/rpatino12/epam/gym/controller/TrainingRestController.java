@@ -1,11 +1,10 @@
 package com.rpatino12.epam.gym.controller;
 
 import com.rpatino12.epam.gym.dto.TrainingDto;
+import com.rpatino12.epam.gym.dto.TrainingResponse;
 import com.rpatino12.epam.gym.dto.TrainingTypeDto;
 import com.rpatino12.epam.gym.dto.WorkloadDto;
-import com.rpatino12.epam.gym.model.Trainer;
 import com.rpatino12.epam.gym.model.Training;
-import com.rpatino12.epam.gym.model.TrainingType;
 import com.rpatino12.epam.gym.service.TrainerService;
 import com.rpatino12.epam.gym.service.TrainingService;
 import com.rpatino12.epam.gym.service.TrainingTypeService;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/trainings")
@@ -43,32 +41,57 @@ public class TrainingRestController {
     // Select training method (GET)
     @GetMapping
     @Operation(summary = "View all trainings")
-    public ResponseEntity<List<Training>> getAll(){
+    public ResponseEntity<List<TrainingResponse>> getAll(){
         log.info("Received GET request to /api/trainings");
+        List<Training> trainings = trainingService.getAll();
+        List<TrainingResponse> responseList = trainings.stream()
+                .map(training -> new TrainingResponse(training.getTrainingName(),
+                        training.getTrainingDate().toString(),
+                        training.getTrainingType().getTrainingTypeName().name(),
+                        training.getTrainingDuration(),
+                        training.getTrainer().getUser().getUsername(),
+                        training.getTrainee().getUser().getUsername()))
+                .toList();
 
-        return new ResponseEntity<>(trainingService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(responseList, HttpStatus.OK);
     }
 
     @GetMapping("/trainee-username/{username}")
     @Operation(summary = "Retrieve specific training with the supplied trainee username")
-    public ResponseEntity<List<Training>> getByTrainee(@PathVariable(name = "username") String username){
+    public ResponseEntity<List<TrainingResponse>> getByTrainee(@PathVariable(name = "username") String username){
         log.info("Received GET request to /api/trainings/trainee-username/{}", username);
 
         List<Training> trainings = trainingService.getByTraineeUsername(username).orElse(new ArrayList<>());
-        return trainings.isEmpty() ?
+        List<TrainingResponse> responseList = trainings.stream()
+                .map(training -> new TrainingResponse(training.getTrainingName(),
+                        training.getTrainingDate().toString(),
+                        training.getTrainingType().getTrainingTypeName().name(),
+                        training.getTrainingDuration(),
+                        training.getTrainer().getUser().getUsername(),
+                        training.getTrainee().getUser().getUsername()))
+                .toList();
+        return responseList.isEmpty() ?
                 new ResponseEntity<>(HttpStatus.NOT_FOUND) :
-                new ResponseEntity<>(trainings, HttpStatus.OK);
+                new ResponseEntity<>(responseList, HttpStatus.OK);
     }
 
     @GetMapping("/trainer-username/{username}")
     @Operation(summary = "Retrieve specific training with the supplied trainer username")
-    public ResponseEntity<List<Training>> getByTrainer(@PathVariable(name = "username") String username){
+    public ResponseEntity<List<TrainingResponse>> getByTrainer(@PathVariable(name = "username") String username){
         log.info("Received GET request to /api/trainings/trainer-username/{}", username);
 
         List<Training> trainings = trainingService.getByTrainerUsername(username).orElse(new ArrayList<>());
-        return trainings.isEmpty() ?
+        List<TrainingResponse> responseList = trainings.stream()
+                .map(training -> new TrainingResponse(training.getTrainingName(),
+                        training.getTrainingDate().toString(),
+                        training.getTrainingType().getTrainingTypeName().name(),
+                        training.getTrainingDuration(),
+                        training.getTrainer().getUser().getUsername(),
+                        training.getTrainee().getUser().getUsername()))
+                .toList();
+        return responseList.isEmpty() ?
                 new ResponseEntity<>(HttpStatus.NOT_FOUND) :
-                new ResponseEntity<>(trainings, HttpStatus.OK);
+                new ResponseEntity<>(responseList, HttpStatus.OK);
     }
 
     // Create training method (POST)

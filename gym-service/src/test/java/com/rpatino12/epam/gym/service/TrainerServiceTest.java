@@ -25,6 +25,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 
 @ExtendWith(MockitoExtension.class)
 class TrainerServiceTest {
@@ -164,6 +165,7 @@ class TrainerServiceTest {
     void updatePassword() {
         Mockito.doReturn(Optional.of(trainer)).when(trainerRepository).findTrainerByUserUsername(user.getUsername());
         Mockito.doReturn(user).when(userService).updateUserPassword("securePassword", user.getId());
+        Mockito.when(passwordEncoder.matches(anyString(), anyString())).thenReturn(true);
 
         String updatePasswordResult = trainerService.updatePassword(user.getUsername(), user.getPassword(), "securePassword");
         assertEquals("Password updated", updatePasswordResult);
@@ -173,6 +175,7 @@ class TrainerServiceTest {
     @DisplayName("updatePassword() when newPassword is the same as oldPassword doesn't update")
     void not_updatePassword() {
         Mockito.doReturn(Optional.of(trainer)).when(trainerRepository).findTrainerByUserUsername(user.getUsername());
+        Mockito.when(passwordEncoder.matches(anyString(), anyString())).thenReturn(true);
 
         String updatePasswordResult = trainerService.updatePassword(user.getUsername(), user.getPassword(), "trainerPassword");
         assertEquals("New password cannot be the same as old password", updatePasswordResult);
@@ -183,6 +186,7 @@ class TrainerServiceTest {
     void updateActiveStatus() {
         Mockito.doReturn(user).when(userService).updateStatus(false, user.getId());
         Mockito.doReturn(Optional.of(trainer)).when(trainerRepository).findTrainerByUserUsername(user.getUsername());
+        Mockito.when(passwordEncoder.matches(anyString(), anyString())).thenReturn(true);
 
         String deactivated = trainerService.updateActiveStatus(user.getUsername(), user.getPassword());
 

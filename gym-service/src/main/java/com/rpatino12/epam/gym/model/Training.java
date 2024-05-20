@@ -1,5 +1,6 @@
 package com.rpatino12.epam.gym.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -12,6 +13,8 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -38,10 +41,14 @@ public class Training implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "TRAINER_ID")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonBackReference(value = "trainer")
     private Trainer trainer;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "TRAINEE_ID")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonBackReference(value = "trainee")
     private Trainee trainee;
 
     @PrePersist

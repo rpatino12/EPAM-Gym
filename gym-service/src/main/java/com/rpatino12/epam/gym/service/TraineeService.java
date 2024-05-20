@@ -40,7 +40,7 @@ public class TraineeService {
         Trainee trainee = traineeRepository.save(newTrainee);
         UserLogin userLogin = new UserLogin(trainee.getUser().getUsername(), trainee.getUser().getPassword());
         trainee.getUser().setPassword(passwordEncoder.encode(trainee.getUser().getPassword()));
-        log.info("Creating trainee: " + trainee);
+        log.info("Saved trainee: " + trainee);
 
         return userLogin;
     }

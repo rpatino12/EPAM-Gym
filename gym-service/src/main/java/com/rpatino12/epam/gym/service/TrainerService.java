@@ -45,7 +45,7 @@ public class TrainerService {
         Trainer trainer = trainerRepository.save(newTrainer);
         UserLogin userLogin = new UserLogin(trainer.getUser().getUsername(), trainer.getUser().getPassword());
         trainer.getUser().setPassword(passwordEncoder.encode(trainer.getUser().getPassword()));
-        log.info("Creating trainer: " + trainer);
+        log.info("Saved trainer: " + trainer);
 
         return userLogin;
     }

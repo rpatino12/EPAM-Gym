@@ -79,7 +79,7 @@ public class TrainingService {
 
     @Transactional(readOnly = true)
     public Optional<List<Training>> getByTraineeUsername(String username){
-        log.info("Getting " + username + " training");
+        log.info("Getting " + username + " trainings");
         return trainingRepository.findTrainingByTraineeUserUsername(username);
     }
 

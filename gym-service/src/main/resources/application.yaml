@@ -26,6 +26,10 @@ resilience4j:
       DemoClientgetDemo:
         timeoutDuration: 10s
 
+logging:
+  pattern:
+    console: "%clr{faint}%clr(%d{yyyy-MM-dd'T'HH:mm:ss, GMT-5}){faint} [%t] %clr(APP=){faint}%clr(${spring.application.name:null}){magenta} %clr{faint}%clr(${LOG_LEVEL_PATTERN:%p}) %clr(CLASS=){faint}%clr(%logger{26}){cyan} %clr(TRACEID=){faint}%clr(%X{CORRELATION_ID:-null}){reverse} | %m%n%ex"
+
 # Symmetric key, this must be at least 256 bits
 jwt:
   key: 1faa372517ac1d389758d3750fc07acf00f542277f26fec1ce4593e93f64e339

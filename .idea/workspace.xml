@@ -5,11 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b985ab9-6807-42e8-a4e7-feb50dc51328" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/config/FeignConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trainer-service/src/main/java/com/rpatino12/epam/trainerservice/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/config/JmsConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/service/jms/Sender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trainer-service/src/main/java/com/rpatino12/epam/trainerservice/config/JmsConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trainer-service/src/main/java/com/rpatino12/epam/trainerservice/service/jms/Receiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/GymApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/GymApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/config/FeignConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/config/FeignConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/util/AppStartupEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/util/AppStartupEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trainer-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trainer-service/src/main/java/com/rpatino12/epam/trainerservice/TrainerServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/src/main/java/com/rpatino12/epam/trainerservice/TrainerServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trainer-service/src/main/java/com/rpatino12/epam/trainerservice/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/src/main/java/com/rpatino12/epam/trainerservice/config/SecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,9 +86,9 @@
     "Maven.gym-service [clean].executor": "Run",
     "Maven.gym-service [validate].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "messaging",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ricardo_patino/Documents/java_specialization/EPAM-Gym",
+    "last_opened_file_path": "C:/Users/ricardo_patino/Documents/java_specialization/messaging/Ex_Files_Spring_Messaging_JMS/Exercise Files/Chapter_01/01_03_end",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -93,7 +100,7 @@
       <recent name="com.rpatino12.epam.gym.dto" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.service in gym-service">
+  <component name="RunManager" selected="Application.TrainerServiceApplication">
     <configuration name="EurekaServerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.eurekaserver.EurekaServerApplication" />
       <module name="eureka-server" />
@@ -151,10 +158,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.service in gym-service" />
-        <item itemvalue="JUnit.controller in gym-service" />
         <item itemvalue="Application.TrainerServiceApplication" />
         <item itemvalue="Application.GymApplication" />
+        <item itemvalue="JUnit.service in gym-service" />
+        <item itemvalue="JUnit.controller in gym-service" />
         <item itemvalue="Application.EurekaServerApplication" />
       </list>
     </recent_temporary>

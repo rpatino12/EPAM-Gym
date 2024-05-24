@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Receiver {
 
-    @JmsListener(destination = "training-queue")
-    public void receiveMessage(String training){
-        log.info("Training received: {}", training);
-    }
+//    @JmsListener(destination = "training-queue")
+//    public void receiveMessage(String training){
+//        log.info("Training received: {}", training);
+//    }
 }

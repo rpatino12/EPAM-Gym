@@ -1,4 +1,4 @@
-package com.rpatino12.epam.gym.dto;
+package com.rpatino12.epam.trainerservice.dto;
 
 import lombok.Data;
 

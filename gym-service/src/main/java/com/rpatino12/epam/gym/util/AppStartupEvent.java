@@ -28,6 +28,5 @@ public class AppStartupEvent implements ApplicationListener<ApplicationReadyEven
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         System.out.println("The gym just started!");
-        sender.sendMessage("training-queue", "Hey Richy");
     }
 }

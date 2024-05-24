@@ -1,12 +1,16 @@
 package com.rpatino12.epam.trainerservice.service;
 
 import com.rpatino12.epam.trainerservice.dto.TrainerDto;
+import com.rpatino12.epam.trainerservice.dto.WorkloadDto;
 import com.rpatino12.epam.trainerservice.model.Trainer;
 import com.rpatino12.epam.trainerservice.repo.TrainerRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.YearMonth;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +18,7 @@ import java.util.Optional;
 @Slf4j
 public class TrainerService {
     private final TrainerRepository trainerRepository;
+    private static final String TRAINING_QUEUE = "training.save.queue";
 
     public TrainerService(TrainerRepository trainerRepository) {
         this.trainerRepository = trainerRepository;
@@ -24,15 +29,37 @@ public class TrainerService {
         return trainerRepository.findAll();
     }
 
-    public Trainer saveTrainer(Trainer trainer) {
-        if (trainerRepository.existsByUsername(trainer.getUsername())){
-            return new Trainer();
+    @JmsListener(destination = TRAINING_QUEUE)
+    @Transactional
+    public void saveTrainer(WorkloadDto workloadDto) {
+
+        Trainer trainer = new Trainer();
+        trainer.setUsername(workloadDto.getUsername());
+        trainer.setFirstName(workloadDto.getFirstName());
+        trainer.setLastName(workloadDto.getLastName());
+        trainer.setStatus(workloadDto.isStatus());
+        trainer.setMonthlySummary(new HashMap<>());
+
+        if (!trainerRepository.existsByUsername(trainer.getUsername())){
+            log.info("Saving workload summary of trainer {}", trainer.getUsername());
+            trainerRepository.save(trainer);
+            updateMonthlySummary(workloadDto);
+        } else {
+            updateMonthlySummary(workloadDto);
         }
-        log.info("Saving workload summary of trainer {}", trainer.getUsername());
-        return trainerRepository.save(trainer);
     }
 
-    public void updateMonthlySummary(TrainerDto trainerDto) {
+    @Transactional
+    public void updateMonthlySummary(WorkloadDto workloadDto) {
+        TrainerDto trainerDto = new TrainerDto();
+        trainerDto.setUsername(workloadDto.getUsername());
+        trainerDto.setFirstName(workloadDto.getFirstName());
+        trainerDto.setLastName(workloadDto.getLastName());
+        trainerDto.setStatus(workloadDto.isStatus());
+        trainerDto.setTrainingDate(workloadDto.getTrainingDate().toLocalDate());
+        trainerDto.setTrainingDuration(workloadDto.getTrainingDuration());
+        trainerDto.setActionType(workloadDto.getActionType());
+
         Optional<Trainer> trainerOptional = trainerRepository.findByUsername(trainerDto.getUsername());
         if(trainerOptional.isPresent()) {
             Trainer trainer = trainerOptional.get();

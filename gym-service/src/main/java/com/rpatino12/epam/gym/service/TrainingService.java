@@ -99,24 +99,27 @@ public class TrainingService {
         jmsTemplate.convertAndSend(TRAINING_QUEUE, workloadDto);
     }
 
-    public void deleteTrainerWorkload(WorkloadDto workloadDto){
-        log.info(
-                "Deleting {} workload of trainer {}",
+    public String deleteTrainerWorkload(WorkloadDto workloadDto){
+        List<Training> trainings = trainingRepository.findByTrainingDateAndTrainerUserUsername(
                 workloadDto.getTrainingDate(),
                 workloadDto.getUsername()
         );
 
-        Optional<Training> optionalTraining = trainingRepository.findByTrainingDateAndTrainerUserUsername(
-                workloadDto.getTrainingDate(),
-                workloadDto.getUsername()
-        );
-        if (optionalTraining.isPresent()){
-            workloadDto.setTrainingDuration(optionalTraining.get().getTrainingDuration());
+        if (!trainings.isEmpty()){
+            log.info(
+                    "Deleting {} workload of trainer {}",
+                    workloadDto.getTrainingDate(),
+                    workloadDto.getUsername()
+            );
+            Training training = trainings.get(0);
+            workloadDto.setTrainingDuration(training.getTrainingDuration());
+            workloadDto.setActionType("DELETE");
+            jmsTemplate.convertAndSend(TRAINING_QUEUE, workloadDto);
+            return "Delete successful";
         } else {
-            workloadDto.setTrainingDuration(0.0);
+            log.error("There are no trainings of {} in {}", workloadDto.getUsername(), workloadDto.getTrainingDate());
+            throw new ResourceNotFoundException("Training");
         }
-
-        jmsTemplate.convertAndSend(TRAINING_QUEUE, workloadDto);
     }
 
     @PostConstruct

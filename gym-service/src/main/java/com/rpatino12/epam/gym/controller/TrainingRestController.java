@@ -130,13 +130,11 @@ public class TrainingRestController {
 
     @PutMapping("/delete-workload")
     @Operation(summary = "Delete specific training workload")
-    public ResponseEntity<Void> deleteTrainingWorkload(@RequestBody WorkloadDto workloadDto) {
+    public ResponseEntity<String> deleteTrainingWorkload(@RequestBody WorkloadDto workloadDto) {
         Date date = new Date(dateUtils.createDateFromDateString(String.valueOf(workloadDto.getTrainingDate())).getTime());
         workloadDto.setTrainingDate(date);
 
         log.info("Received PUT request to /api/trainings/delete-workload");
-        workloadDto.setActionType("DELETE");
-        trainingService.deleteTrainerWorkload(workloadDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(trainingService.deleteTrainerWorkload(workloadDto), HttpStatus.OK);
     }
 }

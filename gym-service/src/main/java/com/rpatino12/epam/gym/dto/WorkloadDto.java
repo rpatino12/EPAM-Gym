@@ -1,5 +1,7 @@
 package com.rpatino12.epam.gym.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.rpatino12.epam.gym.util.SqlDateDeserializer;
 import lombok.Data;
 
 import java.sql.Date;
@@ -10,6 +12,7 @@ public class WorkloadDto {
     private String firstName;
     private String lastName;
     private boolean status;
+    @JsonDeserialize(using = SqlDateDeserializer.class)
     private Date trainingDate;
     private double trainingDuration;
     private String actionType = "ADD";

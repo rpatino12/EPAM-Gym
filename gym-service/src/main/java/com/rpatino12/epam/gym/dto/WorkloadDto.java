@@ -4,10 +4,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.rpatino12.epam.gym.util.SqlDateDeserializer;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 @Data
-public class WorkloadDto {
+public class WorkloadDto implements Serializable {
     private String username;
     private String firstName;
     private String lastName;

@@ -5,7 +5,9 @@ import com.rpatino12.epam.trainerservice.dto.WorkloadDto;
 import com.rpatino12.epam.trainerservice.model.Trainer;
 import com.rpatino12.epam.trainerservice.repo.TrainerRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +21,27 @@ import java.util.Optional;
 public class TrainerService {
     private final TrainerRepository trainerRepository;
     private static final String TRAINING_QUEUE = "training.save.queue";
+    private static final String WORKLOAD_REQUEST_QUEUE = "workload.request.queue";
+    private static final String WORKLOAD_RESPONSE_QUEUE = "workload.response.queue";
+
+    @Autowired
+    private JmsTemplate jmsTemplate;
 
     public TrainerService(TrainerRepository trainerRepository) {
         this.trainerRepository = trainerRepository;
     }
 
+    @Transactional
     public List<Trainer> getAllTrainers() {
         log.info("Getting the registered monthly workloads of all trainers");
         return trainerRepository.findAll();
+    }
+
+    @JmsListener(destination = WORKLOAD_REQUEST_QUEUE)
+    @Transactional
+    public void receiveRequestAndSendWorkloads(String request) {
+        List<Trainer> monthlySummaryList = getAllTrainers();
+        jmsTemplate.convertAndSend(WORKLOAD_RESPONSE_QUEUE, monthlySummaryList);
     }
 
     @JmsListener(destination = TRAINING_QUEUE)
@@ -47,6 +62,7 @@ public class TrainerService {
         } else {
             updateMonthlySummary(workloadDto);
         }
+        receiveRequestAndSendWorkloads("");
     }
 
     @Transactional
@@ -63,6 +79,10 @@ public class TrainerService {
         Optional<Trainer> trainerOptional = trainerRepository.findByUsername(trainerDto.getUsername());
         if(trainerOptional.isPresent()) {
             Trainer trainer = trainerOptional.get();
+            trainer.setFirstName(trainerDto.getFirstName());
+            trainer.setLastName(trainerDto.getLastName());
+            trainer.setStatus(trainerDto.isStatus());
+
             String yearMonth = YearMonth.from(trainerDto.getTrainingDate()).toString();
 
             Double currentDuration = trainer.getMonthlySummary().getOrDefault(yearMonth, 0.0);
@@ -82,6 +102,7 @@ public class TrainerService {
             );
             trainerRepository.save(trainer);
         }
+        receiveRequestAndSendWorkloads("");
     }
 
     public Double getMonthlySummary(String username, YearMonth yearMonth) {

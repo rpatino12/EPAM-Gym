@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Map;
 
 @Entity
 @Table(name = "TRAINERS")
 @Getter
 @Setter
-public class Trainer {
+public class Trainer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

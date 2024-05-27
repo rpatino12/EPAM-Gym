@@ -2,9 +2,11 @@ package com.rpatino12.epam.gym.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.rpatino12.epam.gym.util.MyMessageConverter;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
@@ -18,7 +20,8 @@ public class JmsConfig {
     // MappingJackson2MessageConverter is designed to work with JSON Strings
     @Bean
     public MessageConverter jacksonJmsMessageConverter(){
-        MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
+        // Here we're setting our custom message converter as the default message converter for our JMS template
+        MappingJackson2MessageConverter converter = new MyMessageConverter();
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
@@ -41,4 +44,12 @@ public class JmsConfig {
 
     // We deleted the JmsTemplate bean, because it was overriding the default one provided by Spring
     // Now we are going to work with the default JmsTemplate and it automatically uses the jacksonJmsConverter
+
+    @Bean
+    public DefaultJmsListenerContainerFactory defaultJmsListenerContainerFactory(){
+        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory());
+        factory.setMessageConverter(jacksonJmsMessageConverter());
+        return factory;
+    }
 }

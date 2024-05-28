@@ -51,16 +51,6 @@ spring:
       receive-timeout: 1000
       time-to-live: 36000
 
-resilience4j:
-  circuitbreaker:
-    instances:
-      DemoClientgetDemo:
-        minimumNumberOfCalls: 69
-  timelimiter:
-    instances:
-      DemoClientgetDemo:
-        timeoutDuration: 10s
-
 logging:
   pattern:
     console: "%clr{faint}%clr(%d{yyyy-MM-dd'T'HH:mm:ss, GMT-5}){faint} [%t] %clr(APP=){faint}%clr(${spring.application.name:null}){magenta} %clr{faint}%clr(${LOG_LEVEL_PATTERN:%p}) %clr(CLASS=){faint}%clr(%logger{26}){cyan} %clr(TRACEID=){faint}%clr(%X{CORRELATION_ID:-null}){reverse} | %m%n%ex"

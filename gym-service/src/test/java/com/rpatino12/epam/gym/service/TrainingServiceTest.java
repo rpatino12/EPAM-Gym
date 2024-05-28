@@ -2,7 +2,6 @@ package com.rpatino12.epam.gym.service;
 
 import com.rpatino12.epam.gym.exception.ResourceNotFoundException;
 import com.rpatino12.epam.gym.exception.TrainingNullException;
-import com.rpatino12.epam.gym.feignclients.TrainerFeignClient;
 import com.rpatino12.epam.gym.model.Trainee;
 import com.rpatino12.epam.gym.model.Trainer;
 import com.rpatino12.epam.gym.model.Training;

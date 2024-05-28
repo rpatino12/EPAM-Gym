@@ -3,7 +3,6 @@ package com.rpatino12.epam.gym.service;
 import com.rpatino12.epam.gym.dto.UserLogin;
 import com.rpatino12.epam.gym.exception.ResourceNotFoundException;
 import com.rpatino12.epam.gym.exception.TrainerNullException;
-import com.rpatino12.epam.gym.feignclients.TrainerFeignClient;
 import com.rpatino12.epam.gym.model.Trainer;
 import com.rpatino12.epam.gym.model.TrainingType;
 import com.rpatino12.epam.gym.model.TrainingTypes;
@@ -37,8 +36,6 @@ class TrainerServiceTest {
     private UserService userService;
     @Mock
     private TrainerRepository trainerRepository;
-    @Mock
-    private TrainerFeignClient trainerFeignClient;
     @Mock
     private PasswordEncoder passwordEncoder;
 

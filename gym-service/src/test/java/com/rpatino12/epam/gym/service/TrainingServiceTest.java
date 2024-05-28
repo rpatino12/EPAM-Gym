@@ -18,6 +18,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.jms.core.JmsTemplate;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ class TrainingServiceTest {
     @Mock
     private TrainerService trainerService;
     @Mock
-    private TrainerFeignClient trainerFeignClient;
+    private JmsTemplate jmsTemplate;
 
     private Trainee trainee;
     private Trainer trainer;
@@ -98,6 +99,7 @@ class TrainingServiceTest {
         Mockito.doReturn(Optional.of(trainee)).when(traineeService).getByUsername(userTrainee.getUsername());
         Mockito.doReturn(Optional.of(trainer)).when(trainerService).getByUsername(userTrainer.getUsername());
         Mockito.doReturn(training).when(trainingRepository).save(training);
+        Mockito.doNothing().when(jmsTemplate).convertAndSend(Mockito.anyString(), Mockito.any(Object.class));
 
         boolean isTrainingSaved = trainingService.save(training, userTrainee.getUsername(), userTrainer.getUsername());
         assertTrue(isTrainingSaved);

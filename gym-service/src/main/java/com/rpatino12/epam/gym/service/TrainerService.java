@@ -8,7 +8,6 @@ import com.rpatino12.epam.gym.model.User;
 import com.rpatino12.epam.gym.repo.TrainerRepository;
 import com.rpatino12.epam.gym.model.Trainer;
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,13 +29,13 @@ public class TrainerService {
     private static final String WORKLOAD_RESPONSE_QUEUE = "workload.response.queue";
     private List<TrainerMonthlySummary> monthlySummaryList = new ArrayList<>();
 
-    @Autowired
-    private JmsTemplate jmsTemplate;
+    private final JmsTemplate jmsTemplate;
 
-    public TrainerService(PasswordEncoder passwordEncoder, TrainerRepository trainerRepository, UserService userService) {
+    public TrainerService(PasswordEncoder passwordEncoder, TrainerRepository trainerRepository, UserService userService, JmsTemplate jmsTemplate) {
         this.passwordEncoder = passwordEncoder;
         this.trainerRepository = trainerRepository;
         this.userService = userService;
+        this.jmsTemplate = jmsTemplate;
     }
 
     // Trainer Service class should support possibility to create/update/select Trainer profile.
@@ -159,6 +158,7 @@ public class TrainerService {
         return monthlySummaryList;
     }
 
+    @Transactional
     public void requestWorkloads(){
         log.info("Requesting the monthly workloads to trainer-service");
         jmsTemplate.convertAndSend(WORKLOAD_REQUEST_QUEUE, "Request for all workloads");
@@ -166,7 +166,17 @@ public class TrainerService {
 
     @JmsListener(destination = WORKLOAD_RESPONSE_QUEUE)
     public void receiveWorkloads(List<TrainerMonthlySummary> workloads){
-        monthlySummaryList = workloads;
+        if (workloads == null) {
+            throw new IllegalArgumentException("Workloads list cannot be null");
+        }
+        if (workloads.stream().anyMatch(Objects::isNull)) {
+            throw new IllegalArgumentException("Workloads list cannot contain null elements");
+        }
+        try {
+            monthlySummaryList = workloads;
+        } catch (Exception e){
+            log.error("Error occurred while receiving workloads", e);
+        }
     }
 
     public Double getMonthlySummary(String username, YearMonth yearMonth){
@@ -178,8 +188,10 @@ public class TrainerService {
         if (monthlySummaryOptional.isPresent()){
             TrainerMonthlySummary monthlySummary = monthlySummaryOptional.get();
             return monthlySummary.getMonthlySummary().getOrDefault(yearMonth.toString(), 0.0);
+        } else {
+            log.error("There are no training sessions registered for this trainer");
+            return 0.0;
         }
-        return 0.0;
     }
 
     @PostConstruct

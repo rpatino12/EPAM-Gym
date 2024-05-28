@@ -5,7 +5,6 @@ import com.rpatino12.epam.trainerservice.dto.WorkloadDto;
 import com.rpatino12.epam.trainerservice.model.Trainer;
 import com.rpatino12.epam.trainerservice.repo.TrainerRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
@@ -24,11 +23,11 @@ public class TrainerService {
     private static final String WORKLOAD_REQUEST_QUEUE = "workload.request.queue";
     private static final String WORKLOAD_RESPONSE_QUEUE = "workload.response.queue";
 
-    @Autowired
-    private JmsTemplate jmsTemplate;
+    private final JmsTemplate jmsTemplate;
 
-    public TrainerService(TrainerRepository trainerRepository) {
+    public TrainerService(TrainerRepository trainerRepository, JmsTemplate jmsTemplate) {
         this.trainerRepository = trainerRepository;
+        this.jmsTemplate = jmsTemplate;
     }
 
     @Transactional
@@ -47,6 +46,10 @@ public class TrainerService {
     @JmsListener(destination = TRAINING_QUEUE)
     @Transactional
     public void saveTrainer(WorkloadDto workloadDto) {
+
+        if (workloadDto.getUsername() == null || workloadDto == null) {
+            throw new IllegalArgumentException("WorkloadDto must contain a username and not be null");
+        }
 
         Trainer trainer = new Trainer();
         trainer.setUsername(workloadDto.getUsername());
@@ -79,9 +82,11 @@ public class TrainerService {
         Optional<Trainer> trainerOptional = trainerRepository.findByUsername(trainerDto.getUsername());
         if(trainerOptional.isPresent()) {
             Trainer trainer = trainerOptional.get();
-            trainer.setFirstName(trainerDto.getFirstName());
-            trainer.setLastName(trainerDto.getLastName());
-            trainer.setStatus(trainerDto.isStatus());
+            if (!workloadDto.getActionType().equals("DELETE")){
+                trainer.setFirstName(trainerDto.getFirstName());
+                trainer.setLastName(trainerDto.getLastName());
+                trainer.setStatus(trainerDto.isStatus());
+            }
 
             String yearMonth = YearMonth.from(trainerDto.getTrainingDate()).toString();
 
@@ -112,7 +117,9 @@ public class TrainerService {
         if(trainerOptional.isPresent()) {
             Trainer trainer = trainerOptional.get();
             return trainer.getMonthlySummary().getOrDefault(yearMonth.toString(), 0.0);
+        } else {
+            log.error("There are no training sessions registered for this trainer");
+            return 0.0;
         }
-        return 0.0;
     }
 }

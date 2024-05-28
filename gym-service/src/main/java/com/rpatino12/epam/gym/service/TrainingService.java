@@ -8,7 +8,6 @@ import com.rpatino12.epam.gym.model.Trainer;
 import com.rpatino12.epam.gym.repo.TrainingRepository;
 import com.rpatino12.epam.gym.model.Training;
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -26,13 +25,13 @@ public class TrainingService {
     private final TrainerService trainerService;
     private static final String TRAINING_QUEUE = "training.save.queue";
 
-    @Autowired
-    private JmsTemplate jmsTemplate;
+    private final JmsTemplate jmsTemplate;
 
-    public TrainingService(TrainingRepository trainingRepository, TraineeService traineeService, TrainerService trainerService) {
+    public TrainingService(TrainingRepository trainingRepository, TraineeService traineeService, TrainerService trainerService, JmsTemplate jmsTemplate) {
         this.trainingRepository = trainingRepository;
         this.traineeService = traineeService;
         this.trainerService = trainerService;
+        this.jmsTemplate = jmsTemplate;
     }
 
     // Training Service class should support possibility to create/select Training profile.
@@ -90,6 +89,7 @@ public class TrainingService {
         return trainingRepository.findTrainingByTrainerUserUsername(username);
     }
 
+    @Transactional
     public void saveWorkload(WorkloadDto workloadDto){
         log.info(
                 "Saving {} workload summary of trainer {}",
@@ -99,6 +99,7 @@ public class TrainingService {
         jmsTemplate.convertAndSend(TRAINING_QUEUE, workloadDto);
     }
 
+    @Transactional
     public String deleteTrainerWorkload(WorkloadDto workloadDto){
         List<Training> trainings = trainingRepository.findByTrainingDateAndTrainerUserUsername(
                 workloadDto.getTrainingDate(),

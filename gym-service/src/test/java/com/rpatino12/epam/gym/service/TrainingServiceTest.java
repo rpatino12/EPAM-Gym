@@ -1,5 +1,6 @@
 package com.rpatino12.epam.gym.service;
 
+import com.rpatino12.epam.gym.dto.WorkloadDto;
 import com.rpatino12.epam.gym.exception.ResourceNotFoundException;
 import com.rpatino12.epam.gym.exception.TrainingNullException;
 import com.rpatino12.epam.gym.model.Trainee;
@@ -170,6 +171,56 @@ class TrainingServiceTest {
         assertNotNull(trainings.get());
         assertEquals(5, trainings.get().size());
         assertIterableEquals(trainingList, trainings.get());
+    }
+
+    @Test
+    @DisplayName("saveWorkloadTest() with given workloadDto will send the object with JMS")
+    void saveWorkloadTest() {
+        WorkloadDto workloadDto = new WorkloadDto();
+        workloadDto.setTrainingDate(training.getTrainingDate());
+        workloadDto.setUsername("john.doe");
+
+        trainingService.saveWorkload(workloadDto);
+        Mockito.verify(jmsTemplate).convertAndSend(Mockito.anyString(), Mockito.eq(workloadDto));
+    }
+
+    @Test
+    @DisplayName("deleteTrainerWorkloadTest() with given workloadDto will delete the workload and send it with JMS")
+    void deleteTrainerWorkloadTest(){
+        List<Training> trainingList = new ArrayList<>();
+        trainingList.add(training);
+
+        Mockito.doReturn(trainingList).when(trainingRepository)
+                .findByTrainingDateAndTrainerUserUsername(Mockito.any(Date.class), Mockito.anyString());
+        Mockito.doNothing().when(jmsTemplate).convertAndSend(Mockito.anyString(), Mockito.any(Object.class));
+
+        WorkloadDto workloadDto = new WorkloadDto();
+        workloadDto.setTrainingDate(training.getTrainingDate());
+        workloadDto.setUsername(userTrainer.getUsername());
+
+        String result = trainingService.deleteTrainerWorkload(workloadDto);
+
+        assertEquals("Delete successful", result);
+        Mockito.verify(jmsTemplate).convertAndSend(Mockito.anyString(), Mockito.eq(workloadDto));
+    }
+
+    @Test
+    @DisplayName("deleteTrainerWorkloadTest() no training workload found will throw ResourceNotFoundException")
+    void noTrainingsSavedForTrainer(){
+        List<Training> emptyTrainingList = new ArrayList<>();
+
+        WorkloadDto workloadDto = new WorkloadDto();
+        workloadDto.setTrainingDate(training.getTrainingDate());
+        workloadDto.setUsername(userTrainer.getUsername());
+
+        Mockito.doReturn(emptyTrainingList).when(trainingRepository)
+                .findByTrainingDateAndTrainerUserUsername(training.getTrainingDate(), userTrainer.getUsername());
+
+        assertThrows(
+                ResourceNotFoundException.class,
+                () -> trainingService.deleteTrainerWorkload(workloadDto),
+                "Exception not throw as expected"
+        );
     }
 
     private List<Training> getMockTrainings(int numOfTrainings){

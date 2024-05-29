@@ -1,5 +1,6 @@
 package com.rpatino12.epam.gym.service;
 
+import com.rpatino12.epam.gym.dto.TrainerMonthlySummary;
 import com.rpatino12.epam.gym.dto.UserLogin;
 import com.rpatino12.epam.gym.exception.ResourceNotFoundException;
 import com.rpatino12.epam.gym.exception.TrainerNullException;
@@ -16,11 +17,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.time.YearMonth;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -38,11 +40,14 @@ class TrainerServiceTest {
     private TrainerRepository trainerRepository;
     @Mock
     private PasswordEncoder passwordEncoder;
+    @Mock
+    private JmsTemplate jmsTemplate;
 
     private Trainer trainer;
     private User user;
     private TrainingType specialization;
     private List<Trainer> trainerList;
+    private List<TrainerMonthlySummary> monthlySummaryList;
 
     @BeforeEach
     public void setUp(){
@@ -64,6 +69,20 @@ class TrainerServiceTest {
         trainer.setUser(user);
 
         trainerList = getMockTrainers(4);
+
+        monthlySummaryList = trainerList.stream().map(
+                trainer1 -> {
+                    TrainerMonthlySummary monthlySummary = new TrainerMonthlySummary();
+                    monthlySummary.setUsername(trainer1.getUser().getUsername());
+                    monthlySummary.setFirstName(trainer1.getUser().getFirstName());
+                    monthlySummary.setLastName(trainer1.getUser().getLastName());
+                    monthlySummary.setStatus(trainer1.getUser().getIsActive());
+                    HashMap<String, Double> monthlyTrainings = new HashMap<>();
+                    monthlyTrainings.put("2024-05", 39.0);
+                    monthlyTrainings.put("2024-06", 20.0);
+                    monthlySummary.setMonthlySummary(monthlyTrainings);
+                    return monthlySummary;
+                }).collect(Collectors.toList());
     }
 
     @Test
@@ -109,6 +128,11 @@ class TrainerServiceTest {
         assertThrows(
                 ResourceNotFoundException.class,
                 () -> trainerService.update(trainer, "notAnUser"),
+                "Exception not throw as expected"
+        );
+        assertThrows(
+                ResourceNotFoundException.class,
+                () -> trainerService.getAllWorkloads(),
                 "Exception not throw as expected"
         );
     }
@@ -188,6 +212,60 @@ class TrainerServiceTest {
         String deactivated = trainerService.updateActiveStatus(user.getUsername(), user.getPassword());
 
         assertEquals("User deactivated", deactivated);
+    }
+
+    @Test
+    @DisplayName("getAllWorkloadsTest() should return the registered monthly workloads of all trainers")
+    void getAllWorkloadsTest(){
+        trainerService.receiveWorkloads(monthlySummaryList);
+        List<TrainerMonthlySummary> trainerMonthlySummaryList = trainerService.getAllWorkloads();
+
+        Mockito.verify(jmsTemplate).convertAndSend(Mockito.anyString(), Mockito.anyString());
+        assertIterableEquals(monthlySummaryList, trainerMonthlySummaryList);
+        assertEquals(4, trainerMonthlySummaryList.size());
+    }
+
+    @Test
+    @DisplayName("getMonthlySummaryTest() should return the workload summary of trainer")
+    void getMonthlySummaryTest(){
+        trainerService.receiveWorkloads(monthlySummaryList);
+        YearMonth yearMonth = YearMonth.of(2024, 05);
+        Double trainerMonthlySummary = trainerService.getMonthlySummary("trainerFirst1.trainerLast1", yearMonth);
+
+        assertEquals(39.0, trainerMonthlySummary);
+    }
+
+    @Test
+    @DisplayName("noMonthlySummaryRegisteredForTrainer should return 0.0")
+    void noMonthlySummaryRegisteredForTrainer(){
+        trainerService.receiveWorkloads(monthlySummaryList);
+        YearMonth yearMonth = YearMonth.of(2024, 05);
+        Double trainerMonthlySummary = trainerService.getMonthlySummary("ricardo.patino", yearMonth);
+
+        assertEquals(0.0, trainerMonthlySummary);
+    }
+
+    @Test
+    public void testReceiveWorkloads() {
+        trainerService.receiveWorkloads(monthlySummaryList);
+        // Assert
+        // Assuming that getAllWorkloads() returns the list set by receiveWorkloads()
+        assertEquals(monthlySummaryList, trainerService.getAllWorkloads());
+    }
+
+    @Test
+    public void testReceiveWorkloads_NullWorkloads() {
+        // Act and Assert
+        assertThrows(IllegalArgumentException.class, () -> trainerService.receiveWorkloads(null));
+    }
+
+    @Test
+    public void testReceiveWorkloads_NullElementInWorkloads() {
+        // Arrange
+        List<TrainerMonthlySummary> workloads = Arrays.asList(null, new TrainerMonthlySummary());
+
+        // Act and Assert
+        assertThrows(IllegalArgumentException.class, () -> trainerService.receiveWorkloads(workloads));
     }
 
     private List<Trainer> getMockTrainers(int count){

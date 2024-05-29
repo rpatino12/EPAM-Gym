@@ -6,15 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="8b985ab9-6807-42e8-a4e7-feb50dc51328" name="Changes" comment="Update .gitignore">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/GymApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/GymApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/config/FeignConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/feignclients/TrainerFeignClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/feignclients/TrainerServiceFallback.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/resources/schema.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/service/TrainerServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/service/TrainerServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/service/TrainingServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/service/TrainingServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,12 +58,25 @@
     "JUnit.TraineeServiceTest.updateActiveStatus.executor": "Run",
     "JUnit.TraineeServiceTest.updatePassword.executor": "Run",
     "JUnit.TrainerRestControllerTest.updatePassword.executor": "Run",
-    "JUnit.TrainerServiceTest.executor": "Run",
+    "JUnit.TrainerServiceTest.executor": "Coverage",
+    "JUnit.TrainerServiceTest.getAllWorkloads.executor": "Run",
+    "JUnit.TrainerServiceTest.getAllWorkloadsTest.executor": "Run",
+    "JUnit.TrainerServiceTest.getMonthlySummaryTest.executor": "Run",
+    "JUnit.TrainerServiceTest.noMonthlySummaryRegisteredForTrainer.executor": "Run",
+    "JUnit.TrainerServiceTest.testReceiveWorkloads.executor": "Run",
+    "JUnit.TrainerServiceTest.testReceiveWorkloads_NullElementInWorkloads.executor": "Run",
+    "JUnit.TrainerServiceTest.testReceiveWorkloads_NullWorkloads.executor": "Run",
+    "JUnit.TrainerServiceTest.throwsResourceNotFoundException.executor": "Run",
     "JUnit.TrainingRestControllerTest.executor": "Run",
     "JUnit.TrainingRestControllerTest.getAll.executor": "Run",
     "JUnit.TrainingRestControllerTest.getByTrainer.executor": "Run",
-    "JUnit.TrainingServiceTest.executor": "Run",
+    "JUnit.TrainingServiceTest.deleteTrainerWorkloadTest.executor": "Run",
+    "JUnit.TrainingServiceTest.executor": "Coverage",
+    "JUnit.TrainingServiceTest.noTrainingsSavedForTrainer.executor": "Run",
     "JUnit.TrainingServiceTest.save.executor": "Run",
+    "JUnit.TrainingServiceTest.saveWorkloadTest.executor": "Run",
+    "JUnit.TrainingServiceTest.testSaveWorkload.executor": "Run",
+    "JUnit.TrainingServiceTest.throwsResourceNotFoundException.executor": "Run",
     "JUnit.UserRestControllerTest.login.executor": "Run",
     "JUnit.UserServiceTest.authenticate.executor": "Run",
     "JUnit.UserServiceTest.executor": "Run",
@@ -80,6 +87,8 @@
     "JUnit.service in gym-service.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "Maven.EPAM-Gym [clean].executor": "Run",
+    "Maven.EPAM-Gym [compile].executor": "Run",
+    "Maven.EPAM-Gym [test].executor": "Run",
     "Maven.EPAM-Gym [validate].executor": "Run",
     "Maven.EPAM-Gym [verify].executor": "Run",
     "Maven.gym-service [clean].executor": "Run",
@@ -129,7 +138,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.rpatino12.epam.gym.service in gym-service" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TrainerServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gym-service" />
       <extension name="coverage">
         <pattern>
@@ -138,7 +147,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.rpatino12.epam.gym.service" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.gym.service.TrainerServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -164,8 +174,8 @@
         <item itemvalue="Application.TrainerServiceApplication" />
         <item itemvalue="Application.GymApplication" />
         <item itemvalue="JUnit.controller in gym-service" />
-        <item itemvalue="JUnit.com.rpatino12.epam.gym.service in gym-service" />
         <item itemvalue="JUnit.service in gym-service" />
+        <item itemvalue="JUnit.TrainerServiceTest" />
       </list>
     </recent_temporary>
   </component>
@@ -227,6 +237,12 @@
       <FILTER>com.rpatino12.epam.gym.controller.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/EPAM_Gym$com_rpatino12_epam_gym_service_in_gym_service.ic" NAME="com.rpatino12.epam.gym.service in gym-service Coverage Results" MODIFIED="1715982870426" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.rpatino12.epam.gym.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/EPAM_Gym$TrainingServiceTest.ic" NAME="TrainingServiceTest Coverage Results" MODIFIED="1716932996519" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.rpatino12.epam.gym.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/EPAM_Gym$TrainerServiceTest.ic" NAME="TrainerServiceTest Coverage Results" MODIFIED="1716939088502" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>com.rpatino12.epam.gym.service.*</FILTER>
     </SUITE>
   </component>

@@ -3,17 +3,16 @@ package com.rpatino12.epam.gym.service;
 import com.rpatino12.epam.gym.dto.WorkloadDto;
 import com.rpatino12.epam.gym.exception.ResourceNotFoundException;
 import com.rpatino12.epam.gym.exception.TrainingNullException;
-import com.rpatino12.epam.gym.feignclients.TrainerFeignClient;
 import com.rpatino12.epam.gym.model.Trainee;
 import com.rpatino12.epam.gym.model.Trainer;
 import com.rpatino12.epam.gym.repo.TrainingRepository;
 import com.rpatino12.epam.gym.model.Training;
 import jakarta.annotation.PostConstruct;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,13 +23,15 @@ public class TrainingService {
     private final TrainingRepository trainingRepository;
     private final TraineeService traineeService;
     private final TrainerService trainerService;
-    private final TrainerFeignClient trainerFeignClient;
+    private static final String TRAINING_QUEUE = "training.save.queue";
 
-    public TrainingService(TrainingRepository trainingRepository, TraineeService traineeService, TrainerService trainerService, TrainerFeignClient trainerFeignClient) {
+    private final JmsTemplate jmsTemplate;
+
+    public TrainingService(TrainingRepository trainingRepository, TraineeService traineeService, TrainerService trainerService, JmsTemplate jmsTemplate) {
         this.trainingRepository = trainingRepository;
         this.traineeService = traineeService;
         this.trainerService = trainerService;
-        this.trainerFeignClient = trainerFeignClient;
+        this.jmsTemplate = jmsTemplate;
     }
 
     // Training Service class should support possibility to create/select Training profile.
@@ -53,10 +54,9 @@ public class TrainingService {
                     trainer.get().getUser().getFirstName(),
                     trainer.get().getUser().getLastName(),
                     trainer.get().getUser().getIsActive(),
-                    training.getTrainingDate().toLocalDate(),
+                    training.getTrainingDate(),
                     training.getTrainingDuration());
-            this.saveTrainerWorkload(workloadDto);
-            this.updateTrainerWorkload(workloadDto);
+            this.saveWorkload(workloadDto);
 
             log.info("Creating training: " + training);
             return true;
@@ -89,42 +89,38 @@ public class TrainingService {
         return trainingRepository.findTrainingByTrainerUserUsername(username);
     }
 
-    public void saveTrainerWorkload(WorkloadDto workloadDto){
+    @Transactional
+    public void saveWorkload(WorkloadDto workloadDto){
         log.info(
-                "Saving {}'s workload summary of trainer {}",
-                workloadDto.getTrainingDate().getMonth().toString().toLowerCase(),
+                "Saving {} workload summary of trainer {}",
+                workloadDto.getTrainingDate(),
                 workloadDto.getUsername()
         );
-        trainerFeignClient.postTrainerWorkload(workloadDto);
+        jmsTemplate.convertAndSend(TRAINING_QUEUE, workloadDto);
     }
 
-    public void updateTrainerWorkload(WorkloadDto workloadDto){
-        log.info(
-                "Updating {}'s workload summary of trainer {}",
-                workloadDto.getTrainingDate().getMonth().toString().toLowerCase(),
-                workloadDto.getUsername()
-        );
-        trainerFeignClient.updateTrainerWorkload(workloadDto);
-    }
-
-    public void deleteTrainerWorkload(WorkloadDto workloadDto){
-        log.info(
-                "Deleting {} workload of trainer {}",
+    @Transactional
+    public String deleteTrainerWorkload(WorkloadDto workloadDto){
+        List<Training> trainings = trainingRepository.findByTrainingDateAndTrainerUserUsername(
                 workloadDto.getTrainingDate(),
                 workloadDto.getUsername()
         );
 
-        Optional<Training> optionalTraining = trainingRepository.findByTrainingDateAndTrainerUserUsername(
-                Date.valueOf(workloadDto.getTrainingDate()),
-                workloadDto.getUsername()
-        );
-        if (optionalTraining.isPresent()){
-            workloadDto.setTrainingDuration(optionalTraining.get().getTrainingDuration());
+        if (!trainings.isEmpty()){
+            log.info(
+                    "Deleting {} workload of trainer {}",
+                    workloadDto.getTrainingDate(),
+                    workloadDto.getUsername()
+            );
+            Training training = trainings.get(0);
+            workloadDto.setTrainingDuration(training.getTrainingDuration());
+            workloadDto.setActionType("DELETE");
+            jmsTemplate.convertAndSend(TRAINING_QUEUE, workloadDto);
+            return "Delete successful";
         } else {
-            workloadDto.setTrainingDuration(0.0);
+            log.error("There are no trainings of {} in {}", workloadDto.getUsername(), workloadDto.getTrainingDate());
+            throw new ResourceNotFoundException("Training");
         }
-
-        trainerFeignClient.updateTrainerWorkload(workloadDto);
     }
 
     @PostConstruct

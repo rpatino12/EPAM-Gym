@@ -23,10 +23,10 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
-		</dependency>
+		</dependency>-->
 
 		<!--This dependency includes spring security core and spring security oauth2 jose that includes nimbus jose jwt-->
 		<dependency>
@@ -91,14 +91,26 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
+		</dependency>-->
 
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
+		</dependency>-->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-activemq</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-broker -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-broker</artifactId>
+			<version>6.1.2</version>
 		</dependency>
 
 	</dependencies>

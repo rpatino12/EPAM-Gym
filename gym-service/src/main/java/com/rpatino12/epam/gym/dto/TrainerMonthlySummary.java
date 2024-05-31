@@ -2,10 +2,11 @@ package com.rpatino12.epam.gym.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Map;
 
 @Data
-public class TrainerMonthlySummary {
+public class TrainerMonthlySummary implements Serializable {
     private Long id;
     private String username;
     private String firstName;

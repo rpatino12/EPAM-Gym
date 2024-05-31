@@ -4,19 +4,19 @@ import com.rpatino12.epam.gym.dto.TrainerMonthlySummary;
 import com.rpatino12.epam.gym.dto.UserLogin;
 import com.rpatino12.epam.gym.exception.ResourceNotFoundException;
 import com.rpatino12.epam.gym.exception.TrainerNullException;
-import com.rpatino12.epam.gym.feignclients.TrainerFeignClient;
 import com.rpatino12.epam.gym.model.User;
 import com.rpatino12.epam.gym.repo.TrainerRepository;
 import com.rpatino12.epam.gym.model.Trainer;
 import jakarta.annotation.PostConstruct;
+import org.springframework.jms.annotation.JmsListener;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.YearMonth;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -25,13 +25,17 @@ public class TrainerService {
     private final PasswordEncoder passwordEncoder;
     private final TrainerRepository trainerRepository;
     private final UserService userService;
-    private final TrainerFeignClient trainerFeignClient;
+    private static final String WORKLOAD_REQUEST_QUEUE = "workload.request.queue";
+    private static final String WORKLOAD_RESPONSE_QUEUE = "workload.response.queue";
+    private List<TrainerMonthlySummary> monthlySummaryList = new ArrayList<>();
 
-    public TrainerService(PasswordEncoder passwordEncoder, TrainerRepository trainerRepository, UserService userService, TrainerFeignClient trainerFeignClient) {
+    private final JmsTemplate jmsTemplate;
+
+    public TrainerService(PasswordEncoder passwordEncoder, TrainerRepository trainerRepository, UserService userService, JmsTemplate jmsTemplate) {
         this.passwordEncoder = passwordEncoder;
         this.trainerRepository = trainerRepository;
         this.userService = userService;
-        this.trainerFeignClient = trainerFeignClient;
+        this.jmsTemplate = jmsTemplate;
     }
 
     // Trainer Service class should support possibility to create/update/select Trainer profile.
@@ -143,9 +147,10 @@ public class TrainerService {
         return result;
     }
 
+    @Transactional
     public List<TrainerMonthlySummary> getAllWorkloads(){
         log.info("Getting the registered monthly workloads of all trainers");
-        List<TrainerMonthlySummary> monthlySummaryList = trainerFeignClient.getAll();
+        requestWorkloads();
         if (monthlySummaryList.isEmpty()){
             log.error("There are no training sessions registered yet for any trainer");
             throw new ResourceNotFoundException("Trainers workload");
@@ -153,10 +158,40 @@ public class TrainerService {
         return monthlySummaryList;
     }
 
+    @Transactional
+    public void requestWorkloads(){
+        log.info("Requesting the monthly workloads to trainer-service");
+        jmsTemplate.convertAndSend(WORKLOAD_REQUEST_QUEUE, "Request for all workloads");
+    }
+
+    @JmsListener(destination = WORKLOAD_RESPONSE_QUEUE)
+    public void receiveWorkloads(List<TrainerMonthlySummary> workloads){
+        if (workloads == null) {
+            throw new IllegalArgumentException("Workloads list cannot be null");
+        }
+        if (workloads.stream().anyMatch(Objects::isNull)) {
+            throw new IllegalArgumentException("Workloads list cannot contain null elements");
+        }
+        try {
+            monthlySummaryList = workloads;
+        } catch (Exception e){
+            log.error("Error occurred while receiving workloads", e);
+        }
+    }
+
     public Double getMonthlySummary(String username, YearMonth yearMonth){
         log.info("Getting {}'s workload summary of trainer {}", yearMonth.getMonth().toString().toLowerCase(), username);
+        Optional<TrainerMonthlySummary> monthlySummaryOptional = monthlySummaryList.stream()
+                .filter(trainerMonthlySummary -> trainerMonthlySummary.getUsername().equals(username))
+                .findFirst();
 
-        return trainerFeignClient.getMonthlySummary(username, yearMonth);
+        if (monthlySummaryOptional.isPresent()){
+            TrainerMonthlySummary monthlySummary = monthlySummaryOptional.get();
+            return monthlySummary.getMonthlySummary().getOrDefault(yearMonth.toString(), 0.0);
+        } else {
+            log.error("There are no training sessions registered for this trainer");
+            return 0.0;
+        }
     }
 
     @PostConstruct

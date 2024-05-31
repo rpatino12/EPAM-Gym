@@ -1,6 +1,6 @@
 package com.rpatino12.epam.trainerservice.controller;
 
-import com.rpatino12.epam.trainerservice.dto.TrainerDto;
+import com.rpatino12.epam.trainerservice.dto.WorkloadDto;
 import com.rpatino12.epam.trainerservice.model.Trainer;
 import com.rpatino12.epam.trainerservice.service.TrainerService;
 import lombok.extern.slf4j.Slf4j;
@@ -31,19 +31,11 @@ public class TrainerController {
     }
 
     @PostMapping
-    public ResponseEntity<Trainer> postTrainer(@RequestBody Trainer trainer) {
+    public ResponseEntity postTrainer(@RequestBody WorkloadDto workloadDto) {
         log.info("Received POST request to /api/trainers");
 
-        return new ResponseEntity<>(trainerService.saveTrainer(trainer), HttpStatus.OK);
-    }
-
-
-    @PutMapping("/monthly-summary")
-    public ResponseEntity<Void> updateMonthlySummary(@RequestBody TrainerDto trainerDto) {
-        log.info("Received PUT request to /api/trainers/monthly-summary");
-
-        trainerService.updateMonthlySummary(trainerDto);
-        return ResponseEntity.ok().build();
+        trainerService.saveTrainer(workloadDto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/{username}/monthly-summary/{yearMonth}")

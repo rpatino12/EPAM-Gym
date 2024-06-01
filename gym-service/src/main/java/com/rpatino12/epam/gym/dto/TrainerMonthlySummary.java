@@ -7,7 +7,7 @@ import java.util.Map;
 
 @Data
 public class TrainerMonthlySummary implements Serializable {
-    private Long id;
+    private String id;
     private String username;
     private String firstName;
     private String lastName;

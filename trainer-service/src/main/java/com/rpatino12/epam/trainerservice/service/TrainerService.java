@@ -39,7 +39,7 @@ public class TrainerService {
     @JmsListener(destination = WORKLOAD_REQUEST_QUEUE)
     @Transactional
     public void receiveRequestAndSendWorkloads(String request) {
-        List<Trainer> monthlySummaryList = getAllTrainers();
+        List<Trainer> monthlySummaryList = trainerRepository.findAll();
         jmsTemplate.convertAndSend(WORKLOAD_RESPONSE_QUEUE, monthlySummaryList);
     }
 
@@ -47,7 +47,7 @@ public class TrainerService {
     @Transactional
     public void saveTrainer(WorkloadDto workloadDto) {
 
-        if (workloadDto.getUsername() == null || workloadDto == null) {
+        if (workloadDto == null || workloadDto.getUsername() == null) {
             throw new IllegalArgumentException("WorkloadDto must contain a username and not be null");
         }
 

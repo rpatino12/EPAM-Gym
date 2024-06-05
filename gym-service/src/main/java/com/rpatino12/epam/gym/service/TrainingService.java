@@ -112,7 +112,7 @@ public class TrainingService {
                     workloadDto.getTrainingDate(),
                     workloadDto.getUsername()
             );
-            Training training = trainings.get(0);
+            Training training = trainings.get(trainings.size()-1);
             workloadDto.setTrainingDuration(training.getTrainingDuration());
             workloadDto.setActionType("DELETE");
             jmsTemplate.convertAndSend(TRAINING_QUEUE, workloadDto);

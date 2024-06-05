@@ -58,7 +58,7 @@ public class TrainerService {
         trainer.setStatus(workloadDto.isStatus());
         trainer.setMonthlySummary(new HashMap<>());
 
-        if (!trainerRepository.existsByUsername(trainer.getUsername())){
+        if (!trainerRepository.existsByUsername(trainer.getUsername()) && !workloadDto.getActionType().equals("DELETE")){
             log.info("Saving workload summary of trainer {}", trainer.getUsername());
             trainerRepository.save(trainer);
             updateMonthlySummary(workloadDto);
@@ -95,16 +95,13 @@ public class TrainerService {
             if (trainerDto.getActionType().equals("DELETE")){
                 newDuration = currentDuration - trainerDto.getTrainingDuration();
                 newDuration = (newDuration < 0) ? 0 : newDuration;
+                log.info("Deleting {} workload summary of trainer {}", yearMonth, trainer.getUsername());
             } else {
                 newDuration = currentDuration + trainerDto.getTrainingDuration();
+                log.info("Updating {} workload summary of trainer {}", yearMonth, trainer.getUsername());
             }
             trainer.getMonthlySummary().put(yearMonth, newDuration);
 
-            log.info(
-                    "Updating {} workload summary of trainer {}",
-                    yearMonth,
-                    trainer.getUsername()
-            );
             trainerRepository.save(trainer);
         }
         receiveRequestAndSendWorkloads("");

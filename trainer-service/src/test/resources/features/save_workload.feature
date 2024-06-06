@@ -21,3 +21,8 @@ Feature: Save Workload
     When I save the workload
     Then the workload should be updated under the trainer "john.doe"
     And the monthly summary under the trainer "jane.doe" should be reduced by the last training session duration
+
+  Scenario: Attempt to save a null workload IllegalArgumentException
+    Given a null workload
+    When I attempt to save the workload
+    Then an IllegalArgumentException should be thrown

@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b985ab9-6807-42e8-a4e7-feb50dc51328" name="Changes" comment="Update .gitignore">
+      <change afterPath="$PROJECT_DIR$/trainer-service/src/test/java/com/rpatino12/epam/trainerservice/CucumberTestRunner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trainer-service/src/test/java/com/rpatino12/epam/trainerservice/stepdefs/TrainerServiceStepDefs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trainer-service/src/test/resources/features/save_workload.feature" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/service/TrainingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/service/TrainingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer-service/src/main/java/com/rpatino12/epam/trainerservice/service/TrainerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/src/main/java/com/rpatino12/epam/trainerservice/service/TrainerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trainer-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +54,7 @@
     "Application.EurekaServerApplication.executor": "Run",
     "Application.GymApplication.executor": "Run",
     "Application.TrainerServiceApplication.executor": "Run",
+    "JUnit.CucumberTestRunner.executor": "Run",
     "JUnit.TraineeServiceTest.executor": "Run",
     "JUnit.TraineeServiceTest.not_updatePassword.executor": "Run",
     "JUnit.TraineeServiceTest.save.executor": "Run",
@@ -94,13 +98,13 @@
     "Maven.gym-service [validate].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "integration__testing",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ricardo_patino/Documents/java_specialization/messaging/Ex_Files_Spring_Messaging_JMS/Exercise Files/Chapter_04/04_01_end",
+    "last_opened_file_path": "C:/Users/ricardo_patino/Documents/java_specialization/EPAM-Gym/trainer-service/src/test/java/com/rpatino12/epam/trainerservice/stepdefs",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "configurable.group.language"
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -110,7 +114,7 @@
       <recent name="com.rpatino12.epam.gym.dto" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TrainerServiceApplication">
+  <component name="RunManager" selected="JUnit.CucumberTestRunner">
     <configuration name="GymApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.gym.GymApplication" />
       <module name="gym-service" />
@@ -133,6 +137,21 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CucumberTestRunner" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="trainer-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rpatino12.epam.trainerservice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.rpatino12.epam.trainerservice" />
+      <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.trainerservice.CucumberTestRunner" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -165,21 +184,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="controller in gym-service" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="gym-service" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/controller" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TrainerServiceApplication" />
+        <item itemvalue="JUnit.CucumberTestRunner" />
         <item itemvalue="Application.GymApplication" />
+        <item itemvalue="Application.TrainerServiceApplication" />
         <item itemvalue="JUnit.com.rpatino12.epam.gym.service in gym-service" />
         <item itemvalue="JUnit.com.rpatino12.epam.gym.controller in gym-service" />
-        <item itemvalue="JUnit.controller in gym-service" />
       </list>
     </recent_temporary>
   </component>

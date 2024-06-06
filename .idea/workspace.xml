@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b985ab9-6807-42e8-a4e7-feb50dc51328" name="Changes" comment="Update .gitignore">
-      <change afterPath="$PROJECT_DIR$/trainer-service/src/test/java/com/rpatino12/epam/trainerservice/CucumberTestRunner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trainer-service/src/test/java/com/rpatino12/epam/trainerservice/stepdefs/TrainerServiceStepDefs.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trainer-service/src/test/resources/features/save_workload.feature" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trainer-service/src/main/java/com/rpatino12/epam/trainerservice/controller/TrainerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/src/main/java/com/rpatino12/epam/trainerservice/controller/TrainerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trainer-service/src/main/java/com/rpatino12/epam/trainerservice/service/TrainerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/src/main/java/com/rpatino12/epam/trainerservice/service/TrainerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trainer-service/src/test/java/com/rpatino12/epam/trainerservice/stepdefs/TrainerServiceStepDefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/src/test/java/com/rpatino12/epam/trainerservice/stepdefs/TrainerServiceStepDefs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trainer-service/src/test/resources/features/save_workload.feature" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/src/test/resources/features/save_workload.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +53,12 @@
     "Application.EurekaServerApplication.executor": "Run",
     "Application.GymApplication.executor": "Run",
     "Application.TrainerServiceApplication.executor": "Run",
-    "JUnit.CucumberTestRunner.executor": "Run",
+    "Cucumber Java.Feature: save_workload.executor": "Run",
+    "Cucumber Java.Scenario: Delete a workload for a trainer.executor": "Run",
+    "Cucumber Java.Scenario: Save a new workload for a trainer who does not exist in the database.executor": "Run",
+    "Cucumber Java.Scenario: Save a new workload for an existing trainer.executor": "Run",
+    "Cucumber Java.Scenario: Trainer workload is saved successfully.executor": "Run",
+    "JUnit.CucumberTestRunner.executor": "Coverage",
     "JUnit.TraineeServiceTest.executor": "Run",
     "JUnit.TraineeServiceTest.not_updatePassword.executor": "Run",
     "JUnit.TraineeServiceTest.save.executor": "Run",
@@ -114,13 +118,19 @@
       <recent name="com.rpatino12.epam.gym.dto" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.CucumberTestRunner">
-    <configuration name="GymApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.gym.GymApplication" />
-      <module name="gym-service" />
+  <component name="RunManager" selected="Cucumber Java.Feature: save_workload">
+    <configuration name="Feature: save_workload" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/trainer-service/src/test/resources/features/save_workload.feature" />
+      <option name="GLUE" value="com.rpatino12.epam.trainerservice.stepdefs" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="trainer-service" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter" />
+      <option name="SUGGESTED_NAME" value="Feature: save_workload" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.rpatino12.epam.gym.*" />
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -128,12 +138,59 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TrainerServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.trainerservice.TrainerServiceApplication" />
+    <configuration name="Scenario: Delete a workload for a trainer" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/trainer-service/src/test/resources/features/save_workload.feature" />
+      <option name="GLUE" value="com.rpatino12.epam.trainerservice.stepdefs" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
       <module name="trainer-service" />
+      <option name="NAME_FILTER" value="^Delete a workload for a trainer$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Delete a workload for a trainer$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Delete a workload for a trainer" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.rpatino12.epam.trainerservice.*" />
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Scenario: Save a new workload for a trainer who does not exist in the database" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/trainer-service/src/test/resources/features/save_workload.feature" />
+      <option name="GLUE" value="com.rpatino12.epam.trainerservice.stepdefs" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="trainer-service" />
+      <option name="NAME_FILTER" value="^Save a new workload for a trainer who does not exist in the database$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Save a new workload for a trainer who does not exist in the database$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Save a new workload for a trainer who does not exist in the database" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Scenario: Save a new workload for an existing trainer" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/trainer-service/src/test/resources/features/save_workload.feature" />
+      <option name="GLUE" value="com.rpatino12.epam.trainerservice.stepdefs" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="trainer-service" />
+      <option name="NAME_FILTER" value="^Save a new workload for an existing trainer$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Save a new workload for an existing trainer$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Save a new workload for an existing trainer" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -156,41 +213,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.rpatino12.epam.gym.controller in gym-service" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="gym-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.rpatino12.epam.gym.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.rpatino12.epam.gym.controller" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="com.rpatino12.epam.gym.service in gym-service" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="gym-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.rpatino12.epam.gym.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.rpatino12.epam.gym.service" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Cucumber Java.Feature: save_workload" />
         <item itemvalue="JUnit.CucumberTestRunner" />
-        <item itemvalue="Application.GymApplication" />
-        <item itemvalue="Application.TrainerServiceApplication" />
-        <item itemvalue="JUnit.com.rpatino12.epam.gym.service in gym-service" />
-        <item itemvalue="JUnit.com.rpatino12.epam.gym.controller in gym-service" />
+        <item itemvalue="Cucumber Java.Scenario: Delete a workload for a trainer" />
+        <item itemvalue="Cucumber Java.Scenario: Save a new workload for an existing trainer" />
+        <item itemvalue="Cucumber Java.Scenario: Save a new workload for a trainer who does not exist in the database" />
       </list>
     </recent_temporary>
   </component>
@@ -264,6 +293,12 @@
     </SUITE>
     <SUITE FILE_PATH="coverage/EPAM_Gym$TrainingServiceTest.ic" NAME="TrainingServiceTest Coverage Results" MODIFIED="1716932996519" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>com.rpatino12.epam.gym.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/EPAM_Gym$Feature__save_workload.ic" NAME="Feature: save_workload Coverage Results" MODIFIED="1717682670868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>io.cucumber.core.cli.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/EPAM_Gym$CucumberTestRunner.ic" NAME="CucumberTestRunner Coverage Results" MODIFIED="1717692714964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.rpatino12.epam.trainerservice.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/EPAM_Gym$TrainerServiceTest.ic" NAME="TrainerServiceTest Coverage Results" MODIFIED="1716939088502" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>com.rpatino12.epam.gym.service.*</FILTER>

@@ -4,12 +4,10 @@ import com.rpatino12.epam.trainerservice.dto.WorkloadDto;
 import com.rpatino12.epam.trainerservice.model.Trainer;
 import com.rpatino12.epam.trainerservice.service.TrainerService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.YearMonth;
 import java.util.List;
 
 @RestController
@@ -36,15 +34,5 @@ public class TrainerController {
 
         trainerService.saveTrainer(workloadDto);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping("/{username}/monthly-summary/{yearMonth}")
-    public ResponseEntity<Double> getMonthlySummary(
-            @PathVariable String username,
-            @PathVariable @DateTimeFormat(pattern = "yyyy-MM") YearMonth yearMonth) {
-        log.info("Received GET request to /api/trainers/{}/monthly-summary/{}", username, yearMonth);
-
-        Double monthlySummary = trainerService.getMonthlySummary(username, yearMonth);
-        return ResponseEntity.ok(monthlySummary);
     }
 }

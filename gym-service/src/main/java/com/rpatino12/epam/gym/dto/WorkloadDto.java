@@ -3,11 +3,15 @@ package com.rpatino12.epam.gym.dto;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.rpatino12.epam.gym.util.SqlDateDeserializer;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.sql.Date;
 
 @Data
+@Getter
+@Setter
 public class WorkloadDto implements Serializable {
     private String username;
     private String firstName;

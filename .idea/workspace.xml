@@ -5,12 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b985ab9-6807-42e8-a4e7-feb50dc51328" name="Changes" comment="Update .gitignore">
-      <change afterPath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/CucumberTestRunner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/stepdefs/TrainingServiceStepDefs.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gym-service/src/test/resources/features/training_service_get_trainings.feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gym-service/src/test/resources/features/training_service_save_workload.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/dto/WorkloadDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/dto/WorkloadDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eureka-server/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eureka-server/src/main/java/com/rpatino12/epam/eurekaserver/EurekaServerApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eureka-server/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eureka-server/src/test/java/com/rpatino12/epam/eurekaserver/EurekaServerApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +108,7 @@
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "Maven.EPAM-Gym [clean].executor": "Run",
     "Maven.EPAM-Gym [compile].executor": "Run",
+    "Maven.EPAM-Gym [package].executor": "Run",
     "Maven.EPAM-Gym [test].executor": "Run",
     "Maven.EPAM-Gym [validate].executor": "Run",
     "Maven.EPAM-Gym [verify].executor": "Run",
@@ -112,7 +116,7 @@
     "Maven.gym-service [validate].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "integration__testing",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/ricardo_patino/Documents/java_specialization/EPAM-Gym/trainer-service/src/test/java/com/rpatino12/epam/trainerservice/stepdefs",
     "project.structure.last.edited": "Modules",
@@ -123,53 +127,20 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.rpatino12.epam.trainerservice.config" />
       <recent name="com.rpatino12.epam.gym.stepdefs" />
       <recent name="com.rpatino12.epam.gym" />
       <recent name="com.rpatino12.epam.trainerservice.util" />
       <recent name="com.rpatino12.epam.trainerservice.dto" />
-      <recent name="com.rpatino12.epam.gym.dto" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TrainerServiceApplication">
+  <component name="RunManager" selected="JUnit.CucumberTestRunner">
     <configuration name="GymApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.gym.GymApplication" />
       <module name="gym-service" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.rpatino12.epam.gym.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TrainerServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.trainerservice.TrainerServiceApplication" />
-      <module name="trainer-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.rpatino12.epam.trainerservice.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Scenario: Delete a trainer's workload for a specific date" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
-      <option name="CUCUMBER_CORE_VERSION" value="5" />
-      <option name="FILE_PATH" value="$PROJECT_DIR$/gym-service/src/test/resources/features/training_service_save_workload.feature" />
-      <option name="GLUE" value="com.rpatino12.epam.trainerservice.stepdefs com.rpatino12.epam.gym.stepdefs" />
-      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
-      <module name="gym-service" />
-      <option name="NAME_FILTER" value="^Delete a trainer\'s workload for a specific date$" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Delete a trainer\'s workload for a specific date$&quot;" />
-      <option name="SUGGESTED_NAME" value="Scenario: Delete a trainer's workload for a specific date" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="io.cucumber.core.cli.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -207,13 +178,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="controller in gym-service" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gym-service" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/controller" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="service in gym-service" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gym-service" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/service" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TrainerServiceApplication" />
-        <item itemvalue="Application.GymApplication" />
-        <item itemvalue="JUnit.CucumberTestRunner (1)" />
         <item itemvalue="JUnit.CucumberTestRunner" />
-        <item itemvalue="Cucumber Java.Scenario: Delete a trainer's workload for a specific date" />
+        <item itemvalue="JUnit.controller in gym-service" />
+        <item itemvalue="JUnit.service in gym-service" />
+        <item itemvalue="JUnit.CucumberTestRunner (1)" />
+        <item itemvalue="Application.GymApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -250,7 +237,14 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ID_WIDTH">
+                <map>
+                  <entry key="Table.Default.Author.ColumnIdWidth" value="52" />
+                  <entry key="Table.Default.Date.ColumnIdWidth" value="52" />
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

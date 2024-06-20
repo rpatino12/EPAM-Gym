@@ -106,17 +106,4 @@ public class TrainerService {
         }
         receiveRequestAndSendWorkloads("");
     }
-
-    public Double getMonthlySummary(String username, YearMonth yearMonth) {
-        log.info("Getting {}'s workload summary of trainer {}", yearMonth.getMonth().toString().toLowerCase(), username);
-
-        Optional<Trainer> trainerOptional = trainerRepository.findByUsername(username);
-        if(trainerOptional.isPresent()) {
-            Trainer trainer = trainerOptional.get();
-            return trainer.getMonthlySummary().getOrDefault(yearMonth.toString(), 0.0);
-        } else {
-            log.error("There are no training sessions registered for this trainer");
-            return 0.0;
-        }
-    }
 }

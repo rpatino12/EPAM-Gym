@@ -1,5 +1,6 @@
 package com.rpatino12.epam.gym.controller;
 
+import com.rpatino12.epam.gym.dto.TraineeResponse;
 import com.rpatino12.epam.gym.dto.UpdateUserDto;
 import com.rpatino12.epam.gym.dto.TraineeDto;
 import com.rpatino12.epam.gym.dto.UserLogin;
@@ -7,6 +8,7 @@ import com.rpatino12.epam.gym.model.Trainee;
 import com.rpatino12.epam.gym.model.User;
 import com.rpatino12.epam.gym.service.TraineeService;
 import com.rpatino12.epam.gym.util.DateUtils;
+import com.rpatino12.epam.gym.util.TraineeMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -33,26 +35,34 @@ import java.util.List;
 public class TraineeRestController {
     private final TraineeService traineeService;
     private final DateUtils dateUtils;
+    private final TraineeMapper traineeMapper;
 
-    public TraineeRestController(TraineeService traineeService, DateUtils dateUtils) {
+    public TraineeRestController(TraineeService traineeService, DateUtils dateUtils, TraineeMapper traineeMapper) {
         this.traineeService = traineeService;
         this.dateUtils = dateUtils;
+        this.traineeMapper = traineeMapper;
     }
 
     @GetMapping
     @Operation(summary = "View all trainees")
-    public ResponseEntity<List<Trainee>> getAll(){
+    public ResponseEntity<List<TraineeResponse>> getAll(){
         log.info("Received GET request to /api/trainees");
 
-        return new ResponseEntity<>(traineeService.getAll(), HttpStatus.OK);
+        List<Trainee> trainees = traineeService.getAll();
+        List<TraineeResponse> traineeResponses = trainees.stream()
+                .map(traineeMapper::mapToDTO)
+                .toList();
+
+        return new ResponseEntity<>(traineeResponses, HttpStatus.OK);
     }
 
     @GetMapping("/{username}")
     @Operation(summary = "Retrieve specific trainee with the supplied trainee username")
-    public ResponseEntity<Trainee> getTraineeByUsername(@PathVariable("username") String username){
+    public ResponseEntity<TraineeResponse> getTraineeByUsername(@PathVariable("username") String username){
         log.info("Received GET request to /api/trainees/{}", username);
 
         return traineeService.getByUsername(username)
+                .map(traineeMapper::mapToDTO)
                 .map(trainee -> new ResponseEntity<>(trainee, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }

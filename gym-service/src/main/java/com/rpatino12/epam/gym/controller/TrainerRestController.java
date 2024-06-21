@@ -5,6 +5,7 @@ import com.rpatino12.epam.gym.model.Trainer;
 import com.rpatino12.epam.gym.model.TrainingType;
 import com.rpatino12.epam.gym.model.User;
 import com.rpatino12.epam.gym.service.TrainerService;
+import com.rpatino12.epam.gym.util.TrainerMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -30,26 +31,34 @@ import java.util.List;
 @Slf4j
 public class TrainerRestController {
     private final TrainerService trainerService;
+    private final TrainerMapper trainerMapper;
 
-    public TrainerRestController(TrainerService trainerService) {
+    public TrainerRestController(TrainerService trainerService, TrainerMapper trainerMapper) {
         this.trainerService = trainerService;
+        this.trainerMapper = trainerMapper;
     }
 
     // Select trainers method (GET)
     @GetMapping
     @Operation(summary = "View all trainers")
-    public ResponseEntity<List<Trainer>> getAll(){
+    public ResponseEntity<List<TrainerResponse>> getAll(){
         log.info("Received GET request to /api/trainers");
 
-        return new ResponseEntity<>(trainerService.getAll(), HttpStatus.OK);
+        List<Trainer> trainers = trainerService.getAll();
+        List<TrainerResponse> trainerResponses = trainers.stream()
+                .map(trainerMapper::mapToDTO)
+                .toList();
+
+        return new ResponseEntity<>(trainerResponses, HttpStatus.OK);
     }
 
     @GetMapping("/{username}")
     @Operation(summary = "Retrieve specific trainer with the supplied trainer username")
-    public ResponseEntity<Trainer> getTrainerByUsername(@PathVariable("username") String username){
+    public ResponseEntity<TrainerResponse> getTrainerByUsername(@PathVariable("username") String username){
         log.info("Received GET request to /api/trainers/{}", username);
 
         return trainerService.getByUsername(username)
+                .map(trainerMapper::mapToDTO)
                 .map(trainer -> new ResponseEntity<>(trainer, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }

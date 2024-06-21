@@ -101,7 +101,7 @@ public class TraineeRestController {
 
     @PutMapping("/update")
     @Operation(summary = "Update trainee information")
-    public ResponseEntity<Trainee> updateTrainee(@Valid @RequestBody TraineeDto trainee){
+    public ResponseEntity<TraineeResponse> updateTrainee(@Valid @RequestBody TraineeDto trainee){
         log.info("Received PUT request to /api/trainees/update");
 
         if (traineeService.getByUsername(trainee.getUsername()).isEmpty()){
@@ -124,7 +124,8 @@ public class TraineeRestController {
             updatedTrainee.setAddress(trainee.getAddress());
         }
 
-        return new ResponseEntity<>(traineeService.update(updatedTrainee, trainee.getUsername()), HttpStatus.ACCEPTED);
+        Trainee updated = traineeService.update(updatedTrainee, trainee.getUsername());
+        return new ResponseEntity<>(traineeMapper.mapToDTO(updated), HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/update-password")

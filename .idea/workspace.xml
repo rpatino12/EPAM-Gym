@@ -5,15 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b985ab9-6807-42e8-a4e7-feb50dc51328" name="Changes" comment="Update .gitignore">
-      <change afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/dto/TraineeResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/dto/TrainerItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/dto/TrainerResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/util/TraineeMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/util/TrainerMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/controller/TraineeRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/controller/TraineeRestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/controller/TrainerRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/controller/TrainerRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/controller/TrainerRestControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/test/java/com/rpatino12/epam/gym/controller/TrainerRestControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/model/Trainee.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/model/Trainee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/service/TrainingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/service/TrainingService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +130,7 @@
       <recent name="com.rpatino12.epam.trainerservice.util" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.CucumberTestRunner (1)">
+  <component name="RunManager" selected="JUnit.controller in gym-service">
     <configuration name="GymApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.gym.GymApplication" />
       <module name="gym-service" />
@@ -194,9 +190,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CucumberTestRunner (1)" />
-        <item itemvalue="JUnit.service in gym-service" />
         <item itemvalue="JUnit.controller in gym-service" />
+        <item itemvalue="JUnit.service in gym-service" />
+        <item itemvalue="JUnit.CucumberTestRunner (1)" />
         <item itemvalue="Application.GymApplication" />
         <item itemvalue="Application.TrainerServiceApplication" />
       </list>

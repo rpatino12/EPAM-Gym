@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -44,6 +45,8 @@ public class TrainingService {
         Optional<Trainee> trainee = traineeService.getByUsername(traineeUsername);
         Optional<Trainer> trainer = trainerService.getByUsername(trainerUsername);
         if (trainee.isPresent() && trainer.isPresent()){
+            Set<Trainer> trainerList = trainee.get().getTrainers();
+            trainerList.add(trainer.get());
             newTraining.setTrainee(trainee.get());
             newTraining.setTrainer(trainer.get());
             newTraining.setTrainingType(trainer.get().getSpecialization());

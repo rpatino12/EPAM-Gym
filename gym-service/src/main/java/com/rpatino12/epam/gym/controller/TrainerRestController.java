@@ -90,7 +90,7 @@ public class TrainerRestController {
     // Update trainer method (POST)
     @PutMapping("/update")
     @Operation(summary = "Update trainer information")
-    public ResponseEntity<Trainer> updateTrainer(@Valid @RequestBody TrainerDto trainer){
+    public ResponseEntity<TrainerResponse> updateTrainer(@Valid @RequestBody TrainerDto trainer){
         log.info("Received PUT request to /api/trainers/update");
 
         if (trainerService.getByUsername(trainer.getUsername()).isEmpty()){
@@ -112,7 +112,8 @@ public class TrainerRestController {
         updatedTrainer.setUser(updatedUser);
         updatedTrainer.setSpecialization(trainingType);
 
-        return new ResponseEntity<>(trainerService.update(updatedTrainer, trainer.getUsername()), HttpStatus.ACCEPTED);
+        Trainer updated = trainerService.update(updatedTrainer, trainer.getUsername());
+        return new ResponseEntity<>(trainerMapper.mapToDTO(updated), HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/update-password")

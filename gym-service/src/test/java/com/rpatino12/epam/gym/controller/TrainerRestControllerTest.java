@@ -134,7 +134,7 @@ class TrainerRestControllerTest {
                 .andExpect(content().string(containsString("\"username\":\"betteann.staten\"")))
                 .andExpect(content().string(containsString("\"firstName\":\"Ronnie\"")))
                 .andExpect(content().string(containsString("\"isActive\":false")))
-                .andExpect(content().string(containsString("\"trainingTypeName\":\"Resistance\"")));
+                .andExpect(content().string(containsString("\"specialization\":\"Resistance\"")));
     }
 
     @Test

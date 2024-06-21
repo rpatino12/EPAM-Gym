@@ -38,7 +38,7 @@ public class Trainee implements Serializable {
     @JsonIgnoreProperties(value = {"trainees", "trainings"})
     private Set<Trainer> trainers = new HashSet<>();
 
-    @OneToMany(mappedBy = "trainee")
+    @OneToMany(mappedBy = "trainee", cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     @JsonManagedReference(value = "trainee")
     @JsonIgnore
     private List<Training> trainings;

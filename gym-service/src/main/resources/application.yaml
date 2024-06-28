@@ -4,9 +4,6 @@ spring:
     name: gym-service
   profiles:
     active: dev
-  jpa:
-    hibernate:
-      ddl-auto: none
   output:
     ansi:
       enabled: ALWAYS
@@ -83,11 +80,17 @@ spring:
   h2:
     console:
       enabled: 'true'
+  jpa:
+    hibernate:
+      ddl-auto: none
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver
     username: ricardo
     password: epam
+    schema: classpath:schema.sql
+    data: classpath:data.sql
+    initialization-mode: always
 
 server:
   port: 8080
@@ -110,11 +113,15 @@ spring:
   h2:
     console:
       enabled: 'true'
+  jpa:
+    hibernate:
+      ddl-auto: update
   datasource:
-    url: jdbc:h2:mem:gymdb
-    driverClassName: org.h2.Driver
-    username: admin
-    password: password
+    url: jdbc:mysql://localhost:3306/gymdb
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    initialization-mode: never
 
 server:
   port: 8000
@@ -122,3 +129,9 @@ server:
 logging:
   level:
     root: info
+    org:
+      springframework:
+        jdbc:
+          datasource:
+            init:
+              ScriptUtils: debug

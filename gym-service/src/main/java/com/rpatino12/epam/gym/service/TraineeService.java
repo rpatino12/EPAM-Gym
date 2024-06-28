@@ -52,7 +52,6 @@ public class TraineeService {
             throw new TraineeNullException("Trainee cannot be null");
         }
         User updatedUser = userService.updateUser(updatedTrainee.getUser(), username);
-        updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
         log.info("""
                         Updating trainee {}:\s
                         First Name: {}\s

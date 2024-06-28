@@ -61,7 +61,6 @@ public class TrainerService {
             throw new TrainerNullException("Trainer cannot be null");
         }
         User updatedUser = userService.updateUser(updatedTrainer.getUser(), username);
-        updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
         if (trainerRepository.findTrainerByUserUsername(username).isEmpty()){
             log.error("The entity to be updated does not exist");
             throw new ResourceNotFoundException("Trainer", "username", username);

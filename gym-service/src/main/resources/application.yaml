@@ -110,9 +110,6 @@ spring:
   config:
     activate:
       on-profile: prod
-  h2:
-    console:
-      enabled: 'true'
   jpa:
     hibernate:
       ddl-auto: update
@@ -125,6 +122,37 @@ spring:
 
 server:
   port: 8000
+
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        jdbc:
+          datasource:
+            init:
+              ScriptUtils: debug
+---
+# Without integration with Database and Queue
+spring:
+  config:
+    activate:
+      on-profile: without-db-and-queue
+  activemq:
+    packages:
+      trust-all: false
+      trusted: com.memorynotfound
+    pool:
+      create-connection-on-startup: false
+      enabled: false
+      reconnect-on-exception: false
+  # Spring JMS Settings
+  jms:
+    listener:
+      auto-startup: false
+
+server:
+  port: 8080
 
 logging:
   level:

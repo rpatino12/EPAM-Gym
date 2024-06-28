@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
@@ -17,6 +18,7 @@ import java.text.SimpleDateFormat;
 
 @Configuration
 @Slf4j
+@Profile("!without-db-and-queue")
 public class JmsConfig {
 
     // By adding the properties to the application.yaml for ActiveMQ Spring Boot will automatically configure

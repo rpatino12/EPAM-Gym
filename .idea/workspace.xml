@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8b985ab9-6807-42e8-a4e7-feb50dc51328" name="Changes" comment="Update .gitignore">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/GymApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/GymApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/service/TraineeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/service/TraineeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/config/JmsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/config/JmsConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/service/TrainerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/java/com/rpatino12/epam/gym/service/TrainerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gym-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/src/main/resources/application.yaml" afterDir="false" />
     </list>
@@ -54,6 +52,7 @@
     "Application.EurekaServerApplication.executor": "Run",
     "Application.GymApplication - Dev.executor": "Run",
     "Application.GymApplication - Prod.executor": "Run",
+    "Application.GymApplication - Without DB and Queue.executor": "Run",
     "Application.GymApplication.executor": "Run",
     "Application.TrainerServiceApplication.executor": "Run",
     "Cucumber Java.Feature: get_workloads.executor": "Run",
@@ -133,7 +132,7 @@
       <recent name="com.rpatino12.epam.trainerservice.util" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.GymApplication - Prod">
+  <component name="RunManager" selected="Application.GymApplication - Without DB and Queue">
     <configuration name="GymApplication - Dev" type="Application" factoryName="Application">
       <envs>
         <env name="spring.profiles.active" value="dev" />
@@ -153,6 +152,22 @@
     <configuration name="GymApplication - Prod" type="Application" factoryName="Application">
       <envs>
         <env name="spring.profiles.active" value="prod" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.gym.GymApplication" />
+      <module name="gym-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rpatino12.epam.gym.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GymApplication - Without DB and Queue" type="Application" factoryName="Application">
+      <envs>
+        <env name="spring.profiles.active" value="without-db-and-queue" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.gym.GymApplication" />
       <module name="gym-service" />
@@ -236,15 +251,15 @@
     <list>
       <item itemvalue="Application.GymApplication - Dev" />
       <item itemvalue="Application.GymApplication - Prod" />
+      <item itemvalue="Application.GymApplication - Without DB and Queue" />
       <item itemvalue="Application.TrainerServiceApplication" />
+      <item itemvalue="JUnit.CucumberTestRunner" />
       <item itemvalue="JUnit.com.rpatino12.epam.gym.service in gym-service" />
       <item itemvalue="JUnit.controller in gym-service" />
-      <item itemvalue="JUnit.CucumberTestRunner (1)" />
       <item itemvalue="JUnit.service in gym-service" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CucumberTestRunner (1)" />
         <item itemvalue="JUnit.controller in gym-service" />
         <item itemvalue="JUnit.com.rpatino12.epam.gym.service in gym-service" />
         <item itemvalue="JUnit.service in gym-service" />

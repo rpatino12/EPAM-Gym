@@ -24,11 +24,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!--<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-openfeign</artifactId>
-		</dependency>-->
-
 		<!--This dependency includes spring security core and spring security oauth2 jose that includes nimbus jose jwt-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -96,16 +91,6 @@
 			<version>1.18.30</version>
 			<scope>provided</scope>
 		</dependency>
-
-		<!--<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>-->
-
-		<!--<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
-		</dependency>-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

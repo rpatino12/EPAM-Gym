@@ -1,13 +1,12 @@
+# Common configuration
 spring:
   application:
     name: trainer-service
+  profiles:
+    active: dev
   output:
     ansi:
       enabled: ALWAYS
-  data:
-    mongodb:
-      port: '27017'
-      host: localhost
   activemq:
     broker-url: tcp://localhost:61616
     user: admin
@@ -46,9 +45,6 @@ spring:
 jwt:
   key: 1faa372517ac1d389758d3750fc07acf00f542277f26fec1ce4593e93f64e339
 
-server:
-  port: 8081
-
 logging:
   level:
     org:
@@ -58,3 +54,59 @@ logging:
           autoconfigure:
             mongo:
               embedded: INFO
+
+---
+# Dev profile
+spring:
+  config:
+    activate:
+      on-profile: dev
+  data:
+    mongodb:
+      port: '27017'
+      database: testdb
+de:
+  flapdoodle:
+    mongodb:
+      embedded:
+        version: 5.0.5
+
+server:
+  port: 8081
+
+---
+# Prod profile
+spring:
+  config:
+    activate:
+      on-profile: prod
+  data:
+    mongodb:
+      port: '27018'
+      host: localhost
+      database: gymdb
+
+server:
+  port: 8082
+
+---
+# Without integration with Database and Queue
+spring:
+  config:
+    activate:
+      on-profile: without-db-and-queue
+  activemq:
+    packages:
+      trust-all: false
+      trusted: com.memorynotfound
+    pool:
+      create-connection-on-startup: false
+      enabled: false
+      reconnect-on-exception: false
+  # Spring JMS Settings
+  jms:
+    listener:
+      auto-startup: false
+
+server:
+  port: 8081

@@ -56,6 +56,17 @@ resource "aws_security_group" "gym_sg" {
       prefix_list_ids  = []
       security_groups  = []
       self             = false
+    },
+    {
+      description      = "custom tcp on port 8080"
+      from_port        = 8080
+      to_port          = 8080
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      security_groups  = []
+      self             = false
     }
   ]
   egress = [

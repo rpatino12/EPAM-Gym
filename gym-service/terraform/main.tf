@@ -87,7 +87,7 @@ resource "aws_security_group" "gym_sg" {
   }
 }
 
-resource "aws_instance" "app_server" {
+resource "aws_instance" "main_server" {
   ami                  = var.ami
   instance_type        = var.instance_type
   availability_zone    = var.availability_zone
@@ -99,6 +99,22 @@ resource "aws_instance" "app_server" {
   vpc_security_group_ids = [aws_security_group.gym_sg.id]
 
   tags = {
-    Name = "GymApplicationServer"
+    Name = "MainMicroserviceServer"
+  }
+}
+
+resource "aws_instance" "reporting_server" {
+  ami                  = var.ami
+  instance_type        = var.instance_type
+  availability_zone    = var.availability_zone
+  key_name             = "ec2_key"
+  iam_instance_profile = data.aws_iam_role.s3_readonly.name
+
+  user_data = file("${path.module}/user_data_reporting.sh")
+
+  vpc_security_group_ids = [aws_security_group.gym_sg.id]
+
+  tags = {
+    Name = "ReportingMicroserviceServer"
   }
 }

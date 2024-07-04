@@ -3,11 +3,20 @@ output "SG_id" {
   value       = aws_security_group.gym_sg.id
 }
 
-output "instance_id" {
+output "main_instance_id" {
   description = "ID of the EC2 instance"
-  value       = aws_instance.app_server.id
+  value       = aws_instance.main_server.id
 }
-output "instance_public_ip" {
+output "main_instance_public_ip" {
   description = "Public IP address of the EC2 instance"
-  value       = aws_instance.app_server.public_ip
+  value       = aws_instance.main_server.public_ip
+}
+
+output "reporting_instance_id" {
+  description = "ID of the EC2 instance"
+  value       = aws_instance.reporting_server.id
+}
+output "reporting_instance_public_ip" {
+  description = "Public IP address of the EC2 instance"
+  value       = aws_instance.reporting_server.public_ip
 }

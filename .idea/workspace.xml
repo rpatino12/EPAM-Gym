@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8b985ab9-6807-42e8-a4e7-feb50dc51328" name="Changes" comment="Update Dockerfiles of both microservices&#10;to create an image where the application&#10;starts without integration of database and queue.&#10;Create the Terraform files to create an EC2 instance">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/terraform/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/terraform/main.tf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gym-service/terraform/user_data_main.sh" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/terraform/user_data_main.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer-service/src/main/java/com/rpatino12/epam/trainerservice/config/MongoConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/src/main/java/com/rpatino12/epam/trainerservice/config/MongoConfig.java" afterDir="false" />
-    </list>
+    <list default="true" id="8b985ab9-6807-42e8-a4e7-feb50dc51328" name="Changes" comment="Update the shell script user_data.sh to automate EC2 configuration&#10;Update Mongo configuration so gymdb is not deleted after application stops" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -372,7 +367,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720108399346</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Update the shell script user_data.sh to automate EC2 configuration&#10;Update Mongo configuration so gymdb is not deleted after application stops">
+      <option name="closed" value="true" />
+      <created>1720111819478</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1720111819478</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -396,7 +399,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update .gitignore" />
     <MESSAGE value="Update Dockerfiles of both microservices&#10;to create an image where the application&#10;starts without integration of database and queue.&#10;Create the Terraform files to create an EC2 instance" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Dockerfiles of both microservices&#10;to create an image where the application&#10;starts without integration of database and queue.&#10;Create the Terraform files to create an EC2 instance" />
+    <MESSAGE value="Update the shell script user_data.sh to automate EC2 configuration&#10;Update Mongo configuration so gymdb is not deleted after application stops" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update the shell script user_data.sh to automate EC2 configuration&#10;Update Mongo configuration so gymdb is not deleted after application stops" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

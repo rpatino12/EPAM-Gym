@@ -5,11 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b985ab9-6807-42e8-a4e7-feb50dc51328" name="Changes" comment="Update .gitignore">
-      <change afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gym-service/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trainer-service/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gym-service/terraform/main.tf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gym-service/terraform/output.tf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gym-service/terraform/user_data_main.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gym-service/terraform/variables.tf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gym-service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/gym-service/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trainer-service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/trainer-service/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +23,7 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="Dockerfile" />
       </list>
     </option>
   </component>

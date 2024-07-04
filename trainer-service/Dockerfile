@@ -10,4 +10,4 @@ ARG JAR_FILE=target/trainer-service-0.0.1-SNAPSHOT.jar
 ADD ${JAR_FILE} trainer-service.jar
 
 # Run the jar file
-ENTRYPOINT ["java","-Dspring.profiles.active=prod","-Djava.security.egd=file:/dev/./urandom","-jar","/trainer-service.jar"]
+ENTRYPOINT ["java","-Dspring.profiles.active=without-db-and-queue","-Djava.security.egd=file:/dev/./urandom","-jar","/trainer-service.jar"]

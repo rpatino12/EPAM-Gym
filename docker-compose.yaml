@@ -1,0 +1,47 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: gymdb
+    ports:
+      - "3306:3306"
+    networks:
+      - gym-network
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27018:27017"
+    networks:
+      - gym-network
+
+  activemq:
+    image: rmohr/activemq:latest
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+    networks:
+      - gym-network
+
+  gym-service:
+    build:
+      context: ./gym-service
+    depends_on:
+      - mysql
+      - activemq
+    networks:
+      - gym-network
+
+  trainer-service:
+    build:
+      context: ./trainer-service
+    depends_on:
+      - mongodb
+      - activemq
+    networks:
+      - gym-network
+
+networks:
+  gym-network:

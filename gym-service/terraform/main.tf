@@ -21,9 +21,11 @@ data "aws_iam_role" "s3_readonly" {
 
 # Create a VPC
 resource "aws_vpc" "gym_vpc" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block           = "10.0.0.0/16"
+  enable_dns_support   = true
+  enable_dns_hostnames = true
   tags = {
-    name = "GymApp-Network"
+    Name = "${var.project_name}-Network"
   }
 }
 
@@ -31,7 +33,7 @@ resource "aws_vpc" "gym_vpc" {
 resource "aws_internet_gateway" "gym_IGW" {
   vpc_id = aws_vpc.gym_vpc.id
   tags = {
-    name = "GymApp-IGW"
+    Name = "${var.project_name}-IGW"
   }
 }
 
@@ -40,7 +42,7 @@ resource "aws_internet_gateway" "gym_IGW" {
 resource "aws_route_table" "gym_public_route_table" {
   vpc_id = aws_vpc.gym_vpc.id
   tags = {
-    name = "GymApp-PublicRouteTable"
+    Name = "${var.project_name}-PublicRouteTable"
   }
   route {
     cidr_block = "0.0.0.0/0"
@@ -61,7 +63,7 @@ resource "aws_subnet" "gym_public_subnet" {
   availability_zone = var.availability_zone
 
   tags = {
-    name = "GymApp-PublicSubnet-Main"
+    Name = "${var.project_name}-PublicSubnet-Main"
   }
 }
 
@@ -70,7 +72,7 @@ resource "aws_subnet" "gym_public_subnet" {
 resource "aws_route_table" "gym_private_route_table" {
   vpc_id = aws_vpc.gym_vpc.id
   tags = {
-    name = "GymApp-PrivateRouteTable"
+    Name = "${var.project_name}-PrivateRouteTable"
   }
   route {
     cidr_block = "0.0.0.0/0"
@@ -91,7 +93,7 @@ resource "aws_subnet" "gym_private_subnet" {
   availability_zone = var.availability_zone
 
   tags = {
-    name = "GymApp-PrivateSubnet-Report"
+    Name = "${var.project_name}-PrivateSubnet-Report"
   }
 }
 
@@ -100,7 +102,7 @@ resource "aws_subnet" "gym_private_subnet" {
 resource "aws_route_table" "gym_rds_route_table" {
   vpc_id = aws_vpc.gym_vpc.id
   tags = {
-    name = "GymApp-RdsRouteTable"
+    Name = "${var.project_name}-RdsRouteTable"
   }
   route {
     cidr_block = "0.0.0.0/0"
@@ -121,7 +123,7 @@ resource "aws_subnet" "gym_rds_subnet" {
   availability_zone = var.availability_zone
 
   tags = {
-    name = "GymApp-DBSubnet-RDS"
+    Name = "${var.project_name}-DBSubnet-RDS"
   }
 }
 
@@ -129,7 +131,7 @@ resource "aws_subnet" "gym_rds_subnet" {
 resource "aws_eip" "gym_nat" {
   vpc = true
   tags = {
-    Name = "GymApp-eip-ngw"
+    Name = "${var.project_name}-EIP-NGW"
   }
 }
 
@@ -139,14 +141,46 @@ resource "aws_nat_gateway" "gym_nat" {
   subnet_id     = aws_subnet.gym_public_subnet.id
 
   tags = {
-    Name = "GymApp-ngw"
+    Name = "${var.project_name}-NGW"
   }
   depends_on = [aws_internet_gateway.gym_IGW]
 }
 
+# VPC Endpoints
+# SQS VPC Endpoint
+resource "aws_vpc_endpoint" "sqs_endpoint" {
+  vpc_id            = aws_vpc.gym_vpc.id
+  service_name      = "com.amazonaws.${var.region}.sqs"
+  vpc_endpoint_type = "Interface"
+
+  subnet_ids          = [aws_subnet.gym_public_subnet.id]
+  security_group_ids  = [aws_security_group.gym_sg.id]
+  private_dns_enabled = true
+
+  tags = {
+    Name = "${var.project_name}-VPC-SQS-Endpoint"
+  }
+}
+
+# DynamoDB VPC Endpoint
+resource "aws_vpc_endpoint" "dynamodb_endpoint" {
+  vpc_id            = aws_vpc.gym_vpc.id
+  service_name      = "com.amazonaws.${var.region}.dynamodb"
+  vpc_endpoint_type = "Gateway"
+
+  tags = {
+    Name = "${var.project_name}-VPC-DynamoDB-Endpoint"
+  }
+}
+
+resource "aws_vpc_endpoint_route_table_association" "dynamodb_endpoint_rtb" {
+  vpc_endpoint_id = aws_vpc_endpoint.dynamodb_endpoint.id
+  route_table_id  = aws_route_table.gym_private_route_table.id
+}
+
 # Create security group to allow ingoing ports
 resource "aws_security_group" "gym_sg" {
-  name        = "gym_sec_group"
+  name        = "allow-web"
   description = "Security group for the EC2 instance. Allow https, http and ssh."
   vpc_id      = aws_vpc.gym_vpc.id
   ingress = [
@@ -209,7 +243,7 @@ resource "aws_security_group" "gym_sg" {
     }
   ]
   tags = {
-    name = "allow_web"
+    Name = "${var.project_name}-SecurityGroup"
   }
 }
 

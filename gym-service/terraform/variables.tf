@@ -1,3 +1,9 @@
+variable "project_name" {
+  description = "The name of the project"
+  type        = string
+  default     = "GymApp"
+}
+
 variable "region" {
   description = "The AWS region in which the resources will be created."
   type        = string

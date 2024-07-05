@@ -16,6 +16,12 @@ variable "ami" {
   default     = "ami-0e001c9271cf7f3b9"
 }
 
+variable "key_name" {
+  description = "The name of the Access Key"
+  type        = string
+  default     = "ec2_key"
+}
+
 variable "instance_type" {
   description = "The type of EC2 instance used to create the instance."
   type        = string

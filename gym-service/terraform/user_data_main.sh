@@ -32,6 +32,8 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 
 # Download .tar image from S3
 aws s3 cp s3://mybucket-ricardo/gym-service.tar /home/ubuntu/gym-service.tar
+aws s3 cp s3://mybucket-ricardo/gym-service-dev.tar /home/ubuntu/gym-service-dev.tar
+aws s3 cp s3://mybucket-ricardo/gym-service-prod.tar /home/ubuntu/gym-service-prod.tar
 
 # Load Docker image from .tar file and run Docker container
 sudo docker load -i /home/ubuntu/gym-service.tar

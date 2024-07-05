@@ -32,7 +32,9 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 
 # Download .tar image from S3
 aws s3 cp s3://mybucket-ricardo/trainer-service.tar /home/ubuntu/trainer-service.tar
+aws s3 cp s3://mybucket-ricardo/trainer-service-dev.tar /home/ubuntu/trainer-service-dev.tar
+aws s3 cp s3://mybucket-ricardo/trainer-service-prod.tar /home/ubuntu/trainer-service-prod.tar
 
 # Load Docker image from .tar file and run Docker container
 sudo docker load -i /home/ubuntu/trainer-service.tar
-sudo docker run -d --name reporting-microservice -p 8080:8080 trainer-service:latest
+sudo docker run -d --name reporting-microservice -p 8080:8081 trainer-service:latest

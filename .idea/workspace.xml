@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8b985ab9-6807-42e8-a4e7-feb50dc51328" name="Changes" comment="Update the shell script user_data.sh to automate EC2 configuration&#10;Update Mongo configuration so gymdb is not deleted after application stops" />
+    <list default="true" id="8b985ab9-6807-42e8-a4e7-feb50dc51328" name="Changes" comment=" Automate the launch process of the reporting-microservice.&#10; As indicated in the EC2 module subtask 5." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -131,7 +131,7 @@
       <recent name="com.rpatino12.epam.trainerservice.util" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TrainerServiceApplication - Without DB and Queue">
+  <component name="RunManager" selected="JUnit.CucumberTestRunner">
     <configuration name="GymApplication - Dev" type="Application" factoryName="Application">
       <envs>
         <env name="spring.profiles.active" value="dev" />
@@ -228,6 +228,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="CucumberTestRunner (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gym-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rpatino12.epam.gym.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.rpatino12.epam.gym" />
+      <option name="MAIN_CLASS_NAME" value="com.rpatino12.epam.gym.CucumberTestRunner" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CucumberTestRunner" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="trainer-service" />
       <extension name="coverage">
@@ -319,6 +334,7 @@
       <item itemvalue="Application.TrainerServiceApplication - Prod" />
       <item itemvalue="Application.TrainerServiceApplication - Without DB and Queue" />
       <item itemvalue="JUnit.CucumberTestRunner" />
+      <item itemvalue="JUnit.CucumberTestRunner (1)" />
       <item itemvalue="JUnit.com.rpatino12.epam.gym.controller in gym-service" />
       <item itemvalue="JUnit.com.rpatino12.epam.gym.service in gym-service" />
       <item itemvalue="JUnit.controller in gym-service" />
@@ -326,11 +342,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CucumberTestRunner" />
-        <item itemvalue="JUnit.com.rpatino12.epam.gym.service in gym-service" />
-        <item itemvalue="JUnit.com.rpatino12.epam.gym.controller in gym-service" />
         <item itemvalue="JUnit.controller in gym-service" />
         <item itemvalue="JUnit.service in gym-service" />
+        <item itemvalue="JUnit.CucumberTestRunner (1)" />
+        <item itemvalue="JUnit.CucumberTestRunner" />
+        <item itemvalue="JUnit.com.rpatino12.epam.gym.service in gym-service" />
       </list>
     </recent_temporary>
   </component>
@@ -375,7 +391,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720111819478</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary=" Automate the launch process of the reporting-microservice.&#10; As indicated in the EC2 module subtask 5.">
+      <option name="closed" value="true" />
+      <created>1720112372396</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1720112372396</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -400,7 +424,8 @@
     <MESSAGE value="Update .gitignore" />
     <MESSAGE value="Update Dockerfiles of both microservices&#10;to create an image where the application&#10;starts without integration of database and queue.&#10;Create the Terraform files to create an EC2 instance" />
     <MESSAGE value="Update the shell script user_data.sh to automate EC2 configuration&#10;Update Mongo configuration so gymdb is not deleted after application stops" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update the shell script user_data.sh to automate EC2 configuration&#10;Update Mongo configuration so gymdb is not deleted after application stops" />
+    <MESSAGE value=" Automate the launch process of the reporting-microservice.&#10; As indicated in the EC2 module subtask 5." />
+    <option name="LAST_COMMIT_MESSAGE" value=" Automate the launch process of the reporting-microservice.&#10; As indicated in the EC2 module subtask 5." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
